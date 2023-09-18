@@ -348,7 +348,7 @@
         <!-- Porducts components -->
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-menu-button-wide"></i><span>Packages</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="products-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
@@ -358,9 +358,11 @@
             </li>
             <li>
               <a href="/<?php echo home . route('productCatList'); ?>">
-                <i class="bi bi-circle"></i><span>All Categories</span>
+                <i class="bi bi-circle"></i><span>Categories</span>
               </a>
             </li>
+            <!-- 
+            <hr>
             <li>
               <a href="/<?php echo home . route('productCreate'); ?>">
                 <i class="bi bi-circle"></i><span>Add Product</span>
@@ -369,6 +371,17 @@
             <li>
               <a href="/<?php echo home . route('productList'); ?>">
                 <i class="bi bi-circle"></i><span>All Products</span>
+              </a>
+            </li> -->
+            <hr>
+            <li>
+              <a href="/<?php echo home . route('packageCreate'); ?>">
+                <i class="bi bi-circle"></i><span>Add Package</span>
+              </a>
+            </li>
+            <li>
+              <a href="/<?php echo home . route('packageList'); ?>">
+                <i class="bi bi-circle"></i><span>All Packages</span>
               </a>
             </li>
           </ul>

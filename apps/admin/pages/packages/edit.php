@@ -1,6 +1,6 @@
 <?php
-$product_detail = $context->product_detail;
-$pd = obj($product_detail);
+$package_detail = $context->package_detail;
+$pd = obj($package_detail);
 $catlist = $context->cat_list;
 $meta_tags = null;
 $meta_desc = null;
@@ -15,15 +15,15 @@ if ($pd->json_obj != "") {
 }
 ?>
 
-<form action="/<?php echo home . route('productUpdateAjax', ['id' => $pd->id]); ?>" id="update-new-product-form">
+<form action="/<?php echo home . route('packageUpdateAjax', ['id' => $pd->id]); ?>" id="update-new-package-form">
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title">Edit Product</h5>
+                    <h5 class="card-title">Edit package</h5>
                 </div>
                 <div class="col text-end my-3">
-                    <a class="btn btn-dark" href="/<?php echo home . route('productList'); ?>">Back</a>
+                    <a class="btn btn-dark" href="/<?php echo home . route('packageList'); ?>">Back</a>
                 </div>
             </div>
             <div id="res"></div>
@@ -53,8 +53,18 @@ if ($pd->json_obj != "") {
                     <h4>Banner</h4>
                     <input accept="image/*" id="image-input" type="file" name="banner" class="form-control my-3">
                     <img style="width:100%; max-height:300px; object-fit:contain;" id="banner" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pd->banner; ?>" alt="<?php echo $pd->banner; ?>">
+                    <hr>
+                    <h4>Price/Unit</h4>
+                    <input type="number" scope="any" name="price" value="<?php echo $pd->price; ?>" class="form-control my-3" placeholder="Price">
+                   
+                    <h4>No. of days for tours</h4>
+                    <input type="number" scope="any" name="days" value="<?php echo $pd->days; ?>" class="form-control my-3" placeholder="Days for tours">
+                   
+                    <h4>City</h4>
+                    <input type="text"  name="city" value="<?php echo $pd->city; ?>" class="form-control my-3" placeholder="City">
+                   
                     <div class="d-grid">
-                        <button id="update-product-btn" type="button" class="btn btn-primary my-3">Update</button>
+                        <button id="update-package-btn" type="button" class="btn btn-primary my-3">Update</button>
                     </div>
                 </div>
             </div>
@@ -66,15 +76,15 @@ if ($pd->json_obj != "") {
 <script>
     window.onload = () => {
 
-        const imageInputProduct = document.getElementById('image-input');
-        const imageProduct = document.getElementById('banner');
+        const imageInputpackage = document.getElementById('image-input');
+        const imagepackage = document.getElementById('banner');
 
-        imageInputProduct.addEventListener('change', (event) => {
+        imageInputpackage.addEventListener('change', (event) => {
             const file = event.target.files[0];
             const fileReader = new FileReader();
 
             fileReader.onload = () => {
-                imageProduct.src = fileReader.result;
+                imagepackage.src = fileReader.result;
             };
 
             fileReader.readAsDataURL(file);
@@ -91,4 +101,4 @@ if ($pd->json_obj != "") {
         }
     }
 </script>
-<?php pkAjax_form("#update-product-btn", "#update-new-product-form", "#res"); ?>
+<?php pkAjax_form("#update-package-btn", "#update-new-package-form", "#res"); ?>

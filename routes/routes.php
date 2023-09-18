@@ -79,6 +79,17 @@ $admin_routes = [
     '/admin/product/delete/{id}' => 'Product_ctrl@delete_trash@name.productDelete',
     '/admin/product/edit/{id}/save-by-ajax' => 'Product_ctrl@update@name.productUpdateAjax',
     '/admin/product/toggle-marked-page' => 'Product_ctrl@toggle_trending@name.productToggleMarked',
+    // 
+    '/admin/package/create' => 'Package_ctrl@create@name.packageCreate',
+    '/admin/package/create/save-by-ajax' => 'Package_ctrl@save@name.packageStoreAjax',
+    '/admin/package/list' => 'Package_ctrl@list@name.packageList',
+    '/admin/package/trash-list' => 'Package_ctrl@trash_list@name.packageTrashList',
+    '/admin/package/edit/{id}' => 'Package_ctrl@edit@name.packageEdit',
+    '/admin/package/trash/{id}' => 'Package_ctrl@move_to_trash@name.packageTrash',
+    '/admin/package/restore/{id}' => 'Package_ctrl@restore@name.packageRestore',
+    '/admin/package/delete/{id}' => 'Package_ctrl@delete_trash@name.packageDelete',
+    '/admin/package/edit/{id}/save-by-ajax' => 'Package_ctrl@update@name.packageUpdateAjax',
+    '/admin/package/toggle-marked-page' => 'Package_ctrl@toggle_trending@name.packageToggleMarked',
     // Sliders
     '/admin/slider/create' => 'Slider_ctrl@create@name.sliderCreate',
     '/admin/slider/create/save-by-ajax' => 'Slider_ctrl@save@name.sliderStoreAjax',

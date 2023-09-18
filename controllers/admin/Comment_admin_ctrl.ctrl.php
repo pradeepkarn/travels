@@ -299,7 +299,7 @@ class Comment_admin_ctrl
             exit;
         }
     }
-    public function comment_search_list($comment_group = 'post', $keyword, $ord = "DESC", $limit = 5, $active = 1)
+    public function comment_search_list($comment_group = 'post', $keyword="", $ord = "DESC", $limit = 5, $active = 1)
     {
         $cntobj = new Model('comments');
         $search_arr['name'] = $keyword;

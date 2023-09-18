@@ -8,7 +8,7 @@ $pd = obj($cat_detail);
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title">Edit Post category</h5>
+                    <h5 class="card-title">Edit category</h5>
                 </div>
                 <div class="col text-end my-3">
                     <a class="btn btn-dark" href="/<?php echo home . route('productCatList'); ?>">Back</a>

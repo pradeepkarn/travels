@@ -3,15 +3,15 @@ $createData = $context;
 $catlist = $context->cat_list;
 ?>
 
-<form action="/<?php echo home.route('productStoreAjax'); ?>" id="save-new-page-form">
+<form action="/<?php echo home.route('packageStoreAjax'); ?>" id="save-new-page-form">
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title">Add Product</h5>
+                    <h5 class="card-title">Add package</h5>
                 </div>
                 <div class="col text-end my-3">
-                    <a class="btn btn-dark" href="/<?php echo home . route('productList'); ?>">Back</a>
+                    <a class="btn btn-dark" href="/<?php echo home . route('packageList'); ?>">Back</a>
                 </div>
             </div>
             <div id="res"></div>

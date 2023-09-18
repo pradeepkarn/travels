@@ -1,5 +1,5 @@
 <?php
-$pl = $context->product_list;
+$pl = $context->package_list;
 $tp = $context->total_page;
 $cp = $context->current_page;
 $active = $context->is_active;
@@ -19,10 +19,10 @@ $active = $context->is_active;
                 <div class="card-body">
                     <div class="row">
                         <div class="col my-3">
-                            <h5 class="card-title">All Products</h5>
+                            <h5 class="card-title">All packages</h5>
                             <nav class="nav">
-                                <a class="nav-link <?php echo $active ? "btn btn-sm btn-primary text-white" : ""; ?>" href="/<?php echo home . route('productList'); ?>">Active List</a>
-                                <a class="nav-link <?php echo $active ? "" : "btn btn-sm btn-danger text-white"; ?>" href="/<?php echo home . route('productTrashList'); ?>">Trash List</a>
+                                <a class="nav-link <?php echo $active ? "btn btn-sm btn-primary text-white" : ""; ?>" href="/<?php echo home . route('packageList'); ?>">Active List</a>
+                                <a class="nav-link <?php echo $active ? "" : "btn btn-sm btn-danger text-white"; ?>" href="/<?php echo home . route('packageTrashList'); ?>">Trash List</a>
                             </nav>
 
                         </div>
@@ -39,7 +39,7 @@ $active = $context->is_active;
                             </form>
                         </div>
                         <div class="col text-end my-3">
-                            <a class="btn btn-dark" href="/<?php echo home . route('productCreate'); ?>">Add New</a>
+                            <a class="btn btn-dark" href="/<?php echo home . route('packageCreate'); ?>">Add New</a>
                         </div>
                     </div>
 
@@ -86,12 +86,12 @@ $active = $context->is_active;
                                 $cat_title =  $cat ? $cat['title'] : "Uncategorised";
                                 if ($pv->is_active == true) {
                                     $move_to_text = "Trash";
-                                    $move_to_link = route('productTrash', ['id' => $pv->id]);
+                                    $move_to_link = route('packageTrash', ['id' => $pv->id]);
                                 } else {
-                                    $move_to_link = route('productDelete', ['id' => $pv->id]);
+                                    $move_to_link = route('packageDelete', ['id' => $pv->id]);
                                     $move_to_text = "Delete";
                                     $restore_text = "Restore";
-                                    $restore_link = route('productRestore', ['id' => $pv->id]);
+                                    $restore_link = route('packageRestore', ['id' => $pv->id]);
                                 }
                             ?>
 
@@ -118,7 +118,7 @@ $active = $context->is_active;
                                     <?php
                                     if ($active == true) { ?>
                                         <td>
-                                            <a class="btn-primary btn btn-sm" href="/<?php echo home . route('productEdit', ['id' => $pv->id]); ?>">Edit</a>
+                                            <a class="btn-primary btn btn-sm" href="/<?php echo home . route('packageEdit', ['id' => $pv->id]); ?>">Edit</a>
                                         </td>
                                     <?php    }
                                     ?>
@@ -148,9 +148,9 @@ $active = $context->is_active;
                             $tp = $tp;
                             $current_page = $cp; // Assuming first page is the current page
                             if ($active == true) {
-                                $link =  route('productList');
+                                $link =  route('packageList');
                             } else {
-                                $link =  route('productTrashList');
+                                $link =  route('packageTrashList');
                             }
                             // Show first two pages
                             for ($i = 1; $i <= $tp; $i++) {
@@ -184,7 +184,7 @@ $active = $context->is_active;
                         content_id: content_id,
                         action: 'is_trending'
                     },
-                    `/<?php echo home . route('productToggleMarked') ?>`,
+                    `/<?php echo home . route('packageToggleMarked') ?>`,
                     (err, response) => {
                         if (err) {
                             // console.error('Error:', err);
@@ -212,7 +212,7 @@ $active = $context->is_active;
                         content_id: content_id,
                         action: 'is_featured'
                     },
-                    `/<?php echo home . route('productToggleMarked') ?>`,
+                    `/<?php echo home . route('packageToggleMarked') ?>`,
                     (err, response) => {
                         if (err) {
                             // console.error('Error:', err);
