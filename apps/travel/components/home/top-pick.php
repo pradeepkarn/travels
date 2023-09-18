@@ -40,7 +40,7 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="trend-item rounded box-shadow">
                         <div class="trend-image position-relative">
-                            <img src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pkg->banner; ?>" alt="image" class>
+                            <img style="height: 300px;" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pkg->banner; ?>" alt="image" class>
                             <div class="color-overlay"></div>
                         </div>
                         <div class="trend-content p-4 pt-5 position-relative">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <h5 class="theme mb-1"><i class="flaticon-location-pin"></i> <?php echo $pkg->city; ?></h5>
-                            <h3 class="mb-1"><a href="tour-single.php"><?php echo $pkg->title; ?></a></h3>
+                            <h3 class="mb-1"><a href="tour-single.php"><?php echo pk_excerpt($pkg->title,20); ?></a></h3>
                             <div class="rating-main d-flex align-items-center pb-2">
                                 <div class="rating">
                                     <span class="fa fa-star checked"></span>
