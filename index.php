@@ -41,10 +41,7 @@ function lang($dir)
 
 $home = home;
 define('RELOAD', js("location.reload();"));
-if (authenticate() == false) {
-  $gctrl = new Fb_auth_ctlr;
-  $gctrl->sign_up_or_login();
-}
+
 $acnt = new Account;
 if (isset($_COOKIE['remember_token'])) {
   $acnt->loginWithCookie($cookie = $_COOKIE['remember_token']);

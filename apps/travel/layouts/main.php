@@ -66,7 +66,7 @@
 
                                 </li>
                                 <li><a href="/<?php echo home.route('aboutUs'); ?>">About Us</a></li>
-                                <li><a href="visa.php">Visa</a></li>
+                                <li><a href="/<?php echo home.route('visa'); ?>">Visa</a></li>
 
                                 <li class="submenu dropdown">
                                     <a href="tour.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <i class="icon-arrow-down" aria-hidden="true"></i></a>

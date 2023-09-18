@@ -1,5 +1,5 @@
-<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo STATIC_URL;  ?>/assets/images/bg/bg1.jpg);">
-    <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL;  ?>/assets/images/shape8.png);"></div>
+<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo STATIC_URL;  ?>/tour/assets/images/bg/bg1.jpg);">
+    <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL;  ?>/tour/assets/images/shape8.png);"></div>
     <div class="breadcrumb-outer">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -18,13 +18,13 @@
 
 
 
-<section class="about-us pt-0" style="background-image:url(/<?php echo STATIC_URL;  ?>/assets/images/bg/bg-trans.png);">
+<section class="about-us pt-0" style="background-image:url(/<?php echo STATIC_URL;  ?>/tour/assets/images/bg/bg-trans.png);">
     <div class="container">
         <div class="about-image-box">
             <div class="row d-flex align-items-center justify-content-between">
                 <div class="col-lg-6 mb-4 pe-lg-4">
                     <div class="about-image overflow-hidden">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/travel1.png" alt="">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/travel1.png" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 mb-4 ps-ls-4">
@@ -107,7 +107,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item rounded box-shadow">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa1.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa1.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -132,7 +132,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa2.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa2.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -155,7 +155,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa3.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa3.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -177,7 +177,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa4.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa4.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -199,7 +199,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item rounded box-shadow">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa5.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa5.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -243,7 +243,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item rounded box-shadow">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa6.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa6.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -268,7 +268,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa7.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa7.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -291,7 +291,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa8.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa8.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -313,7 +313,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa9.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa9.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -335,7 +335,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item rounded box-shadow">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa10.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa10.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">
@@ -358,7 +358,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="trend-item box-shadow rounded">
                     <div class="trend-image position-relative">
-                        <img src="/<?php echo STATIC_URL;  ?>/assets/images/visa11.png" alt="image" height="250px">
+                        <img src="/<?php echo STATIC_URL;  ?>/tour/assets/images/visa11.png" alt="image" height="250px">
                         <div class="color-overlay"></div>
                     </div>
                     <div class="trend-content p-4 pt-5 position-relative">

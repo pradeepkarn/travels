@@ -1,8 +1,4 @@
 <?php
-// $lang = DEFAULT_LANG;
-// if (isset($_COOKIE['lang'])) {
-//     $lang = $_COOKIE['lang'];
-// }
 $home = home;
 // Define the routes
 $login_routes = [
@@ -21,9 +17,12 @@ $login_routes = [
     "/send-otp-on-ajax" => 'Auth@send_otp@name.sendOtpAjax',
 ];
 $public_routes = [
-    "" => "Travel_home_ctrl@index@name.travelHome",
-    "/" => "Travel_home_ctrl@index@name.shopHomeSlash",
+    "" => "Travel_home_ctrl@index@name.home",
+    "/" => "Travel_home_ctrl@index@name.homeSlash",
     "/about-us" => "Travel_about_ctrl@index@name.aboutUs",
+    "/visa" => "Travel_visa_ctrl@index@name.visa",
+    "/tour" => "Travel_tour_ctrl@index@name.tour",
+    "/contact" => "Travel_contact_ctrl@index@name.contact",
 ];
 
 $user_routes = [

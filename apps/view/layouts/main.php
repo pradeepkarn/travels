@@ -67,67 +67,23 @@ $meta = isset($GLOBALS['meta_seo']) ? $GLOBALS['meta_seo'] : $default_meta;
         <div class="nav-div container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <a href="/<?php echo home . route('home'); ?>" class="logo d-flex align-items-center">
-                <img src="/<?php echo MEDIA_URL; ?>/logo/logo.png" alt="Logo">
+                <?php echo SITE_NAME; ?>
             </a>
 
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto" href="/<?php echo home . route('home'); ?>"><?php echo lang("nav")->home; ?></a></li>
-                    <li><a class="nav-link scrollto" href="/<?php echo home . route('home'); ?>/about"><?php echo lang("nav")->about; ?></a></li>
-                    <!-- <li><a class="nav-link scrollto" href="/<?php //echo home . route('home'); 
-                                                                    ?>/#services">Services</a></li> -->
-                    <!-- <li><a class="nav-link scrollto" href="/<?php //echo home . route('home'); 
-                                                                    ?>/#portfolio">Portfolio</a></li> -->
-                    <!-- <li><a class="nav-link scrollto" href="/<?php //echo home . route('home'); 
-                                                                    ?>/#team">Team</a></li> -->
-                    <!-- <li><a href="#">Blog</a></li> -->
+                    <li><a class="nav-link scrollto" href="/<?php echo home . route('aboutUs'); ?>"><?php echo lang("nav")->about; ?></a></li>
+                   
 
-
-                    <!-- <li class="dropdown megamenu"><a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li>
-                                <a href="#">Column 1 link 1</a>
-                                <a href="#">Column 1 link 2</a>
-                                <a href="#">Column 1 link 3</a>
-                            </li>
-                            <li>
-                                <a href="#">Column 2 link 1</a>
-                                <a href="#">Column 2 link 2</a>
-                                <a href="#">Column 3 link 3</a>
-                            </li>
-                            <li>
-                                <a href="#">Column 3 link 1</a>
-                                <a href="#">Column 3 link 2</a>
-                                <a href="#">Column 3 link 3</a>
-                            </li>
-                            <li>
-                                <a href="#">Column 4 link 1</a>
-                                <a href="#">Column 4 link 2</a>
-                                <a href="#">Column 4 link 3</a>
-                            </li>
-                        </ul>
-                    </li> -->
-
-                    <li><a class="nav-link scrollto" href="/<?php echo home . route('home'); ?>/#contact"><?php echo lang("nav")->contact; ?></a></li>
+                    <li><a class="nav-link scrollto" href="/<?php echo home . route('contact'); ?>"><?php echo lang("nav")->contact; ?></a></li>
                     <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
                     <li class="dropdown"><a href="#"><span><?php echo lang("nav")->account; ?></span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <!-- <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li> -->
+                            
                             <li>
 
                                 <?php if (USER) : ?>
-                                    <a href="/<?php echo home . route('showPublicProfile',['profile_id'=>USER['id']]); ?>"><?php echo lang("nav")->public_profile ?? "Public Profile"; ?></a>
-                                    <!-- <a href="/<?php //echo home . route('userProfile'); ?>"><?php //echo lang("nav")->profile ?? "Profile"; ?></a> -->
-                                    <a href="/<?php echo home . route('userProfileEdit'); ?>"><?php echo lang("nav")->profile_edit ?? "Profile Edit"; ?></a>
                                     <a href="/<?php echo home . route('logout'); ?>"><?php echo lang("nav")->logout ?? "Logout"; ?></a>
                                 <?php else : ?>
                                     <a href="/<?php echo home . route('userLogin'); ?>"><?php echo lang("nav")->login ?? "Login"; ?></a>
@@ -157,95 +113,14 @@ $meta = isset($GLOBALS['meta_seo']) ? $GLOBALS['meta_seo'] : $default_meta;
 
 
     <?php
-    // if (USER == false) {
-    //     import("apps/view/components/common/fb/pop-up.php");
-    // }
+    
     import("apps/view/pages/{$context->page}", $context);
     ?>
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-
-        <!-- <div class="footer-newsletter">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12 text-center">
-                        <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-5 col-md-12 footer-info">
-                        <a href="/<?php echo home.route('home'); ?>" class="footer-logo d-flex align-items-center">
-                            <img src="/<?php echo MEDIA_URL; ?>/logo/logo.png" alt="logo">
-                        </a>
-                        <p><?php echo lang('global')->welcome_to_site ?? "Welcome to " . SITE_NAME; ?></p>
-                        <div class="social-links mt-3">
-                            <a href="https://fb.com/pradeepkarn" class="twitter"><i class="bi bi-twitter"></i></a>
-                            <a href="https://fb.com/itsme.pkarn" class="facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="https://fb.com/pradeepkarn" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="https://fb.com/pradeepkarn" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-12 footer-links">
-                        <h4><?php echo lang('global')->useful_links ?? "Useful_links"; ?></h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/<?php echo home . route('home'); ?>"><?php echo lang('nav')->home ?? "Home"; ?></a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/<?php echo home . route('pageBySlug', ['slug' => 'about']); ?>"><?php echo lang('nav')->about ?? "About"; ?></a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/<?php echo home . route('pageBySlug', ['slug' => 'terms-of-use']); ?>"><?php echo lang('global')->terms_of_use ?? "Terms of use"; ?></a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="/<?php echo home . route('pageBySlug', ['slug' => 'privacy-policy']); ?>"><?php echo lang('global')->privacy_policy ?? "Privacy Policy"; ?></a></li>
-                        </ul>
-                    </div>
-
-                    <!-- <div class="col-lg-2 col-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div> -->
-
-                    <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-                        <h4><?php echo lang('global')->contact_us ?? "Contact us"; ?></h4>
-                        <p>
-                            <?php echo lang('global')->darbhanga ?? "Darbhanga"; ?><br>
-                            <?php echo lang('global')->bihar ?? "Bharat"; ?><br>
-                            <?php echo lang('global')->bharat ?? "Bharat"; ?><br><br>
-                        </p>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="copyright">
-                &copy; <?php echo lang('global')->copy_right ?? "Copyright"; ?> <strong><span><?php echo lang('global')->me ?? "Pradeep Karn"; ?></span></strong>. <?php echo lang('global')->all_rights_reserved . " " . date("Y") ?? "All rights reserved"; ?>
-            </div>
-            <div class="credits">
-                <?php echo lang('global')->developed_by ?? "Developed by"; ?> <a href="https://fb.com/itsme.pkarn"><?php echo lang('global')->me ?? "Pradeep Karn"; ?></a>
-            </div>
-        </div>
-    </footer><!-- End Footer -->
+ 
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    <?php  //import("apps/view/components/common/chat/chat.php"); 
-    ?>
+ 
     <!-- Vendor JS Files -->
     <script src="/<?php echo STATIC_URL; ?>/view/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/view/assets/vendor/aos/aos.js"></script>
@@ -258,40 +133,7 @@ $meta = isset($GLOBALS['meta_seo']) ? $GLOBALS['meta_seo'] : $default_meta;
     <!-- Template Main JS File -->
     <script src="/<?php echo STATIC_URL; ?>/view/assets/js/main.js"></script>
 
-    <script>
-        <?php
-        $gctrl = new Fb_auth_ctlr;
-        $authUrl = $gctrl->login_url();
-        ?>
-        // fb
-        function openFacebookLoginPopup() {
-            // Set your Facebook app ID and redirect URI
-            const facebookLoginUrl = `<?php echo $authUrl; ?>`;
-            // Open the popup window with the Facebook login URL
-            const popupWindow = window.open(facebookLoginUrl, 'FacebookLogin', 'width=600,height=400');
 
-            // Check the popup window status at regular intervals
-            const intervalId = setInterval(function() {
-                if (popupWindow.closed) {
-                    // Popup window closed, so check if login was successful and reload the page
-                    checkLoginStatusAndReload();
-                    clearInterval(intervalId);
-                }
-            }, 1000);
-
-            // Listen for messages from the popup window
-            window.addEventListener('message', function(event) {
-                if (event.data === 'loginSuccess') {
-                    // Close the popup when a successful login message is received
-                    popupWindow.close();
-                }
-            });
-        }
-
-        function checkLoginStatusAndReload() {
-            location.reload();
-        }
-    </script>
     <script>
         $(document).ready(function() {
             $(".custom-number-input").on("input", function() {
