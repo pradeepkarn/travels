@@ -41,7 +41,16 @@ $catlist = $context->cat_list;
                     <h4>Banner</h4>
                     <input accept="image/*" id="image-input" type="file" name="banner" class="form-control my-3">
                     <img style="width:100%; max-height:300px; object-fit:contain;" id="banner" src="" alt="">
-
+                    <hr>
+                    <h4>Price/Unit</h4>
+                    <input type="number" scope="any" name="price"  class="form-control my-3" placeholder="Price">
+                   
+                    <h4>No. of days for tours</h4>
+                    <input type="number" scope="any" name="days"  class="form-control my-3" placeholder="Days for tours">
+                   
+                    <h4>City</h4>
+                    <input type="text"  name="city"  class="form-control my-3" placeholder="City">
+                   
                     <div class="d-grid">
                         <button id="save-page-btn" type="button" class="btn btn-primary my-3">Save</button>
                     </div>

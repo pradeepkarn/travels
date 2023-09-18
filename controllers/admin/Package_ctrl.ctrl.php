@@ -115,7 +115,10 @@ class Package_ctrl
             'slug' => 'required|string',
             'content' => 'required|string',
             'banner' => 'required|file',
-            'parent_id' => 'required|integer'
+            'parent_id' => 'required|integer',
+            'price' => 'required|numeric',
+            'days' => 'required|numeric',
+            'city' => 'required|string',
         ];
         $pass = validateData(data: $data, rules: $rules);
         if (!$pass) {
@@ -137,6 +140,9 @@ class Package_ctrl
             $arr['content_group'] = "package";
             $arr['title'] = $request->title;
             $arr['slug'] = generate_slug(trim($request->slug));
+            $arr['days'] = $request->days;
+            $arr['price'] = $request->price;
+            $arr['city'] = $request->city;
             $arr['content'] = $request->content;
             $arr['parent_id'] = $request->parent_id;
             $arr['created_at'] = date('Y-m-d H:i:s');

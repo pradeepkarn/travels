@@ -18,7 +18,7 @@ class Travel_home_ctrl extends Main_ctrl
             $load_page = (abs($req->page) - 1) * $data_limit;
             $row_limit = "$load_page,$data_limit";
         }
-        $total_products = $this->product_list(ord: "DESC", limit: 10000, active: 1);
+        $total_products = $this->package_list(ord: "DESC", limit: 10000, active: 1);
         $to = count($total_products);
         if ($to %  $data_limit == 0) {
             $to = $to / $data_limit;
@@ -27,7 +27,7 @@ class Travel_home_ctrl extends Main_ctrl
         }
 
         $cat_list = $this->cat_list($ord = "DESC", $limit = $row_limit, $active = 1);
-        $product_list = $this->product_list($ord = "DESC", $limit = $row_limit, $active = 1);
+        $package_list = $this->package_list($ord = "DESC", $limit = $row_limit, $active = 1);
 
         $GLOBALS['meta_seo'] = (object) array('title' => 'Home', 'description' => 'Welcome to our Gift shop', 'keywords' => 'gifts,shop,wedding,birthday');
         $context = (object) array(
@@ -35,7 +35,7 @@ class Travel_home_ctrl extends Main_ctrl
             'data' => (object) array(
                 'req' => obj($req),
                 'cat_list' => $cat_list,
-                'product_list' => $product_list,
+                'package_list' => $package_list,
                 'current_page' => $cp,
                 'total_object' => $to,
                 'about' => $this->about_content(),
@@ -48,11 +48,11 @@ class Travel_home_ctrl extends Main_ctrl
         }
         $this->render_layout($context);
     }
-    public function product_list($ord = "DESC", $limit = 1, $active = 1)
+    public function package_list($ord = "DESC", $limit = 1, $active = 1)
     {
         $cntobj = new Dbobjects;
         $cntobj->tableName = 'content';
-        return $cntobj->filter(array('content_group' => 'product', 'is_active' => $active), $ord, $limit);
+        return $cntobj->filter(array('content_group' => 'package', 'is_active' => $active), $ord, $limit);
     }
     public function cat_list($ord = "DESC", $limit = 1, $active = 1)
     {
