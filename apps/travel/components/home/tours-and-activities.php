@@ -1,4 +1,3 @@
-
 <style>
     .square-frame {
         width: calc(33.33% - 10px);

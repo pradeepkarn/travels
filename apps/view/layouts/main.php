@@ -1,5 +1,5 @@
 <?php
-$default_meta = (object) array('title' => 'Wed', 'description' => 'Welcome to our blog', 'keywords' => 'Weding site, weding, social, culture');
+$default_meta = (object) array('title' => SITE_NAME, 'description' => 'Welcome to our '.SITE_NAME, 'keywords' => 'Weding site, weding, social, culture');
 $meta = isset($GLOBALS['meta_seo']) ? $GLOBALS['meta_seo'] : $default_meta;
 ?>
 <!DOCTYPE html>

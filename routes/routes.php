@@ -21,7 +21,8 @@ $public_routes = [
     "/" => "Travel_home_ctrl@index@name.homeSlash",
     "/about-us" => "Travel_about_ctrl@index@name.aboutUs",
     "/visa" => "Travel_visa_ctrl@index@name.visa",
-    "/tour" => "Travel_tour_ctrl@index@name.tour",
+    "/tours" => "Travel_tours_ctrl@index@name.tours",
+    "/services" => "Travel_services_ctrl@index@name.services",
     "/contact" => "Travel_contact_ctrl@index@name.contact",
 ];
 

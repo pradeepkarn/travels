@@ -90,10 +90,7 @@ $meta = isset($GLOBALS['meta_seo']) ? $GLOBALS['meta_seo'] : $default_meta;
     <script src="/<?php echo STATIC_URL; ?>/view/assets/js/main.js"></script>
 
     <script>
-        <?php
-        $gctrl = new Fb_auth_ctlr;
-        $authUrl = $gctrl->login_url();
-        ?>
+        
         // fb
         function openFacebookLoginPopup() {
             // Set your Facebook app ID and redirect URI

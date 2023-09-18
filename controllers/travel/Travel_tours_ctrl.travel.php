@@ -1,5 +1,5 @@
 <?php
-class Travel_tour_ctrl extends Main_ctrl
+class Travel_tours_ctrl extends Main_ctrl
 {
     public function index($req = null)
     {
@@ -26,7 +26,7 @@ class Travel_tour_ctrl extends Main_ctrl
 
         $GLOBALS['meta_seo'] = (object) array('title' => 'Home', 'description' => 'Welcome to our Gift shop', 'keywords' => 'gifts,shop,wedding,birthday');
         $context = (object) array(
-            'page' => 'tour.php',
+            'page' => 'tours.php',
             'data' => (object) array(
                 'req' => obj($req),
                 'cat_list' => $cat_list,

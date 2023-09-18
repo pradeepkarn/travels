@@ -69,13 +69,13 @@
                                 <li><a href="/<?php echo home.route('visa'); ?>">Visa</a></li>
 
                                 <li class="submenu dropdown">
-                                    <a href="tour.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <i class="icon-arrow-down" aria-hidden="true"></i></a>
+                                    <a href="/<?php echo home.route('tours'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <i class="icon-arrow-down" aria-hidden="true"></i></a>
                                     
                                 </li>
                                 <li class="submenu dropdown">
-                                    <a href="services.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <i class="icon-arrow-down" aria-hidden="true"></i></a>
+                                    <a href="/<?php echo home.route('services'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <i class="icon-arrow-down" aria-hidden="true"></i></a>
                                 </li>
-                                <li><a href="contact.php">Contact</a></li>
+                                <li><a href="/<?php echo home.route('contact'); ?>">Contact</a></li>
 
 
                                 <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li>
