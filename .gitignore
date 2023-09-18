@@ -1,0 +1,6 @@
+*.env
+*.zip
+FlexStart
+info.txt
+.htacess
+/tour
