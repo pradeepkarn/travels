@@ -175,7 +175,7 @@ class Admin_user_ctrl
             $postid = (new Model('pk_user'))->store($arr);
             if (intval($postid)) {
                 $ext = pathinfo($request->image['name'], PATHINFO_EXTENSION);
-                $imgname = str_replace(" ", "_", $request->username) . uniqid("_") . "." . $ext;
+                $imgname = str_replace(" ", "_", getUrlSafeString($request->username)) . uniqid("_") . "." . $ext;
                 $dir = MEDIA_ROOT . "images/profiles/" . $imgname;
                 $upload = move_uploaded_file($request->image['tmp_name'], $dir);
                 if ($upload) {
@@ -272,7 +272,7 @@ class Admin_user_ctrl
 
             if ($request->image != false && $request->image['name'] != "" && $request->image['error'] == 0) {
                 $ext = pathinfo($request->image['name'], PATHINFO_EXTENSION);
-                $imgname = str_replace(" ", "_", $request->username) . uniqid("_") . "." . $ext;
+                $imgname = str_replace(" ", "_", getUrlSafeString($request->username)) . uniqid("_") . "." . $ext;
                 $dir = MEDIA_ROOT . "images/profiles/" . $imgname;
                 $upload = move_uploaded_file($request->image['tmp_name'], $dir);
                 if ($upload) {

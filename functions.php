@@ -1330,3 +1330,16 @@ function compressImage($sourceFile, $maxFileSize)
 
   return $targetFile;
 }
+
+function getUrlSafeString($inputString) {
+  // Replace spaces with hyphens and remove other special characters
+  $urlSafeString = preg_replace('/[^a-zA-Z0-9\-]/', '-', $inputString);
+
+  // Remove consecutive hyphens and trim leading/trailing hyphens
+  $urlSafeString = preg_replace('/-+/', '-', trim($urlSafeString, '-'));
+
+  // Convert to lowercase
+  $urlSafeString = strtolower($urlSafeString);
+
+  return $urlSafeString;
+}

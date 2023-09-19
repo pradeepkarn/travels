@@ -40,7 +40,7 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="trend-item rounded box-shadow">
                         <div class="trend-image position-relative">
-                            <img style="height: 300px;" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pkg->banner; ?>" alt="image" class>
+                            <img style="height: 300px; widht:100%; object-fit:cover;" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pkg->banner; ?>" alt="image" class>
                             <div class="color-overlay"></div>
                         </div>
                         <div class="trend-content p-4 pt-5 position-relative">

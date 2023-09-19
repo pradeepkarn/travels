@@ -129,7 +129,7 @@ class Product_category_admin_ctrl
              $postid = (new Model('content'))->store($arr);
              if (intval($postid)) {
                  $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
-                 $imgname = str_replace(" ","_",$request->title).uniqid("_") . "." . $ext;
+                 $imgname = str_replace(" ","_",getUrlSafeString($request->title)).uniqid("_") . "." . $ext;
                  $dir = MEDIA_ROOT . "images/pages/" . $imgname;
                  $upload = move_uploaded_file($request->banner['tmp_name'], $dir);
                  if ($upload) {
@@ -177,7 +177,7 @@ class Product_category_admin_ctrl
              $arr['content'] = $request->content;
              if ($request->banner['name'] != "" && $request->banner['error'] == 0) {
                  $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
-                 $imgname = str_replace(" ","_",$request->title).uniqid("_") . "." . $ext;
+                 $imgname = str_replace(" ","_",getUrlSafeString($request->title)).uniqid("_") . "." . $ext;
                  $dir = MEDIA_ROOT . "images/pages/" . $imgname;
                  $upload = move_uploaded_file($request->banner['tmp_name'], $dir);
                  if ($upload) {

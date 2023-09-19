@@ -149,7 +149,8 @@ class Package_ctrl
             $postid = (new Model('content'))->store($arr);
             if (intval($postid)) {
                 $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
-                $imgname = str_replace(" ", "_", $request->title) . uniqid("_") . "." . $ext;
+                $imgstr = getUrlSafeString($request->title);
+                $imgname = str_replace(" ", "_", $imgstr) . uniqid("_") . "." . $ext;
                 $dir = MEDIA_ROOT . "images/pages/" . $imgname;
                 $upload = move_uploaded_file($request->banner['tmp_name'], $dir);
                 if ($upload) {
@@ -244,7 +245,8 @@ class Package_ctrl
             $arr['updated_at'] = date('Y-m-d H:i:s');
             if ($request->banner['name'] != "" && $request->banner['error'] == 0) {
                 $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
-                $imgname = str_replace(" ", "_", $request->title) . uniqid("_") . "." . $ext;
+                $imgstr = getUrlSafeString($request->title);
+                $imgname = str_replace(" ", "_", $imgstr) . uniqid("_") . "." . $ext;
                 $dir = MEDIA_ROOT . "images/pages/" . $imgname;
                 $upload = move_uploaded_file($request->banner['tmp_name'], $dir);
                 if ($upload) {
@@ -263,7 +265,7 @@ class Package_ctrl
             try {
                 (new Model('content'))->update($request->id, $arr);
                 echo js_alert('package updated');
-                // echo go_to(route('packageEdit', ['id' => $request->id]));
+                echo go_to(route('packageEdit', ['id' => $request->id]));
                 exit;
             } catch (PDOException $e) {
                 echo js_alert('package not updated, check slug or content data');

@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="/<?php echo STATIC_URL; ?>/tour/assets/line-icons.css" type="text/css">
+    <link rel="stylesheet" href="/<?php echo STATIC_URL; ?>/owl/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/<?php echo STATIC_URL; ?>/owl/dist/assets/owl.theme.default.min.css">
+    <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="/<?php echo STATIC_URL; ?>/owl/dist/owl.carousel.min.js"></script>
 </head>
 
 <body>
@@ -65,17 +69,17 @@
                                     <a href="/<?php echo home; ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
 
                                 </li>
-                                <li><a href="/<?php echo home.route('aboutUs'); ?>">About Us</a></li>
-                                <li><a href="/<?php echo home.route('visa'); ?>">Visa</a></li>
+                                <li><a href="/<?php echo home . route('aboutUs'); ?>">About Us</a></li>
+                                <li><a href="/<?php echo home . route('visa'); ?>">Visa</a></li>
 
                                 <li class="submenu dropdown">
-                                    <a href="/<?php echo home.route('tours'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <i class="icon-arrow-down" aria-hidden="true"></i></a>
-                                    
+                                    <a href="/<?php echo home . route('tours'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <i class="icon-arrow-down" aria-hidden="true"></i></a>
+
                                 </li>
                                 <li class="submenu dropdown">
-                                    <a href="/<?php echo home.route('services'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <i class="icon-arrow-down" aria-hidden="true"></i></a>
+                                    <a href="/<?php echo home . route('services'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <i class="icon-arrow-down" aria-hidden="true"></i></a>
                                 </li>
-                                <li><a href="/<?php echo home.route('contact'); ?>">Contact</a></li>
+                                <li><a href="/<?php echo home . route('contact'); ?>">Contact</a></li>
 
 
                                 <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li>
@@ -305,8 +309,7 @@
 
 
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/jquery-3.5.1.min.js"></script>
+    <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/bootstrap.min.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/particles.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/particlerun.js"></script>
