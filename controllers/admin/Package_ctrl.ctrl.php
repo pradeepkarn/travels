@@ -263,7 +263,7 @@ class Package_ctrl
             try {
                 (new Model('content'))->update($request->id, $arr);
                 echo js_alert('package updated');
-                echo go_to(route('packageEdit', ['id' => $request->id]));
+                // echo go_to(route('packageEdit', ['id' => $request->id]));
                 exit;
             } catch (PDOException $e) {
                 echo js_alert('package not updated, check slug or content data');
