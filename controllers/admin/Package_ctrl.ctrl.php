@@ -110,6 +110,7 @@ class Package_ctrl
         $data = null;
         $data = $_POST;
         $data['banner'] = $_FILES['banner'];
+
         $rules = [
             'title' => 'required|string',
             'slug' => 'required|string',
@@ -119,13 +120,17 @@ class Package_ctrl
             'price' => 'required|numeric',
             'days' => 'required|numeric',
             'city' => 'required|string',
+            'min_age' => 'required|numeric',
+            'max_people' => 'required|numeric',
+            'pickup' => 'required|string',
+            'languages' => 'required|string',
         ];
+        
         $pass = validateData(data: $data, rules: $rules);
         if (!$pass) {
             echo js_alert(msg_ssn("msg", true));
             exit;
         }
-
         $request = obj($data);
         $json_arr = array();
         if (isset($request->meta_tags)) {
@@ -146,6 +151,27 @@ class Package_ctrl
             $arr['content'] = $request->content;
             $arr['parent_id'] = $request->parent_id;
             $arr['created_at'] = date('Y-m-d H:i:s');
+            $arr['min_age'] = $request->min_age;
+            $arr['max_people'] = $request->max_people;
+            $arr['pickup'] = $request->pickup;
+            $arr['languages'] = $request->languages;
+            $moreimg = [];
+            if (isset($_FILES['moreimgs'])) {
+                $fl = $_FILES['moreimgs'];
+                for ($i = 0; $i < count($fl['name']); $i++) {
+                    if ($fl['name'][$i] != '' && $fl['error'][$i] === UPLOAD_ERR_OK) {
+                        $ext = pathinfo($fl['name'][$i], PATHINFO_EXTENSION);
+                        $imgstr = getUrlSafeString($fl['name'][$i]);
+                        $moreimgname = str_replace(" ", "_", $imgstr) . uniqid("_moreimg_") . "." . $ext;
+                        $dir = MEDIA_ROOT . "images/pages/" . $moreimgname;
+                        $upload = move_uploaded_file($fl['tmp_name'][$i], $dir);
+                        if ($upload) {
+                            $moreimg[] = $moreimgname;
+                        }
+                    }
+                }
+                $arr['imgs'] = json_encode($moreimg);
+            }
             $postid = (new Model('content'))->store($arr);
             if (intval($postid)) {
                 $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
@@ -215,6 +241,10 @@ class Package_ctrl
             'price' => 'required|numeric',
             'days' => 'required|numeric',
             'city' => 'required|string',
+            'min_age' => 'required|numeric',
+            'max_people' => 'required|numeric',
+            'pickup' => 'required|string',
+            'languages' => 'required|string',
         ];
         $pass = validateData(data: $data, rules: $rules);
         if (!$pass) {
@@ -243,6 +273,10 @@ class Package_ctrl
             $arr['city'] = $request->city;
             $arr['parent_id'] = $request->parent_id;
             $arr['updated_at'] = date('Y-m-d H:i:s');
+            $arr['min_age'] = $request->min_age;
+            $arr['max_people'] = $request->max_people;
+            $arr['pickup'] = $request->pickup;
+            $arr['languages'] = $request->languages;
             if ($request->banner['name'] != "" && $request->banner['error'] == 0) {
                 $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
                 $imgstr = getUrlSafeString($request->title);
@@ -376,7 +410,7 @@ class Package_ctrl
     public function package_list($ord = "DESC", $limit = 5, $active = 1, $sort_by = 'views')
     {
         $cntobj = new Model('content');
-        return $cntobj->filter_index(array('content_group' => 'package', 'is_active' => $active), $ord, $limit, $change_order_by_col=$sort_by);
+        return $cntobj->filter_index(array('content_group' => 'package', 'is_active' => $active), $ord, $limit, $change_order_by_col = $sort_by);
     }
     public function package_search_list($keyword, $ord = "DESC", $limit = 5, $active = 1)
     {

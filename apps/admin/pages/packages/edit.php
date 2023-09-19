@@ -57,6 +57,18 @@ if ($pd->json_obj != "") {
                     <h4>Price/Unit</h4>
                     <input type="number" scope="any" name="price" value="<?php echo $pd->price; ?>" class="form-control my-3" placeholder="Price">
                    
+                    <h4>Min. Age</h4>
+                    <input type="text" name="min_age" value="<?php echo $pd->min_age; ?>" class="form-control my-3" placeholder="Min age">
+
+                    <h4>Max. People</h4>
+                    <input type="text" name="max_people" value="<?php echo $pd->max_people; ?>" class="form-control my-3" placeholder="Max people">
+
+                    <h4>Pickup</h4>
+                    <input type="text" name="pickup" value="<?php echo $pd->pickup; ?>" class="form-control my-3" placeholder="Airport">
+
+                    <h4>Languages</h4>
+                    <input type="text" name="languages" value="<?php echo $pd->languages; ?>" class="form-control my-3" placeholder="Hindi, Arabic, English, Spanish">
+
                     <h4>No. of days for tours</h4>
                     <input type="number" scope="any" name="days" value="<?php echo $pd->days; ?>" class="form-control my-3" placeholder="Days for tours">
                    

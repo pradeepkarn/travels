@@ -3,7 +3,7 @@ $createData = $context;
 $catlist = $context->cat_list;
 ?>
 
-<form action="/<?php echo home.route('packageStoreAjax'); ?>" id="save-new-page-form">
+<form action="/<?php echo home . route('packageStoreAjax'); ?>" id="save-new-page-form">
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -41,16 +41,30 @@ $catlist = $context->cat_list;
                     <h4>Banner</h4>
                     <input accept="image/*" id="image-input" type="file" name="banner" class="form-control my-3">
                     <img style="width:100%; max-height:300px; object-fit:contain;" id="banner" src="" alt="">
+                    <div id="image-container"></div>
+                    <button type="button" class="btn btn-secondary text-white" id="add-image">Images <i class="bi bi-plus"></i> </button>
                     <hr>
                     <h4>Price/Unit</h4>
-                    <input type="number" scope="any" name="price"  class="form-control my-3" placeholder="Price">
-                   
+                    <input type="number" scope="any" name="price" class="form-control my-3" placeholder="Price">
+
+                    <h4>Min. Age</h4>
+                    <input type="text" name="min_age" class="form-control my-3" placeholder="Min age">
+
+                    <h4>Max. People</h4>
+                    <input type="text" name="max_people" class="form-control my-3" placeholder="Max people">
+
+                    <h4>Pickup</h4>
+                    <input type="text" name="pickup" class="form-control my-3" placeholder="Airport">
+
+                    <h4>Languages</h4>
+                    <input type="text" name="languages" class="form-control my-3" placeholder="Hindi, Arabic, English, Spanish">
+
                     <h4>No. of days for tours</h4>
-                    <input type="number" scope="any" name="days"  class="form-control my-3" placeholder="Days for tours">
-                   
+                    <input type="number" scope="any" name="days" class="form-control my-3" placeholder="Days for tours">
+
                     <h4>City</h4>
-                    <input type="text"  name="city"  class="form-control my-3" placeholder="City">
-                   
+                    <input type="text" name="city" class="form-control my-3" placeholder="City">
+
                     <div class="d-grid">
                         <button id="save-page-btn" type="button" class="btn btn-primary my-3">Save</button>
                     </div>
@@ -62,31 +76,41 @@ $catlist = $context->cat_list;
 
 </form>
 <script>
-     window.onload = () => {
-    const imageInputPage = document.getElementById('image-input');
-    const imagePage = document.getElementById('banner');
+    window.onload = () => {
+        const imageInputPage = document.getElementById('image-input');
+        const imagePage = document.getElementById('banner');
 
-    imageInputPage.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        const fileReader = new FileReader();
+        imageInputPage.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const fileReader = new FileReader();
 
-        fileReader.onload = () => {
-            imagePage.src = fileReader.result;
-        };
+            fileReader.onload = () => {
+                imagePage.src = fileReader.result;
+            };
 
-        fileReader.readAsDataURL(file);
-    });
-
-    // for slug
-    
-    const titleInput = document.querySelector('input[name="title"]');
-    const slugInput = document.querySelector('input[name="slug"]');
-    if (titleInput && slugInput) {
-        titleInput.addEventListener('keyup', () => {
-            const title = titleInput.value.trim();
-            generateSlug(title, slugInput);
+            fileReader.readAsDataURL(file);
         });
+
+        // for slug
+
+        const titleInput = document.querySelector('input[name="title"]');
+        const slugInput = document.querySelector('input[name="slug"]');
+        if (titleInput && slugInput) {
+            titleInput.addEventListener('keyup', () => {
+                const title = titleInput.value.trim();
+                generateSlug(title, slugInput);
+            });
+        }
     }
-}
+
+
+
+    $(document).ready(function() {
+        $('#add-image').on('click', function() {
+            // Create a new image input field
+            var newInput = '<input accept="image/*" type="file" name="moreimgs[]" class="form-control my-3">';
+            $('#image-container').append(newInput);
+        });
+    });
 </script>
 <?php pkAjax_form("#save-page-btn", "#save-new-page-form", "#res"); ?>
