@@ -34,7 +34,7 @@
                     foreach ($catlist as $key => $cat) :
                         $cat = obj($cat);
                     ?>
-                        <div class="item cat-item">
+                        <div class="item cat-item" data-cat-id="<?php echo $cat->id; ?>">
                             <img src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $cat->banner; ?>" alt="<?php echo $cat->title; ?>">
                             <p class="text-center"><?php echo $cat->title; ?></p>
                         </div>
@@ -44,6 +44,27 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function () {
+        // Attach a click event handler to the cat-items
+        $('.cat-item').on('click', function () {
+            var catId = $(this).data('cat-id');
+            // Make an AJAX request to the server
+            $.ajax({
+                url: '/<?php echo home.route('fetchPkgAjax'); ?>', // Replace with your server URL
+                type: 'POST', // You can change this to 'GET' if needed
+                data: { cat_id: catId }, // Send the cat_id to the server
+                success: function (response) {
+                    $("#set-template").html(response);
+                },
+                error: function (error) {
+                    console.error('AJAX error:', error);
+                }
+            });
+        });
+    });
+</script>
 
 
 <script>
@@ -77,4 +98,5 @@
     $('.stop').on('click', function() {
         owl.trigger('stop.owl.autoplay')
     })
+    
 </script>

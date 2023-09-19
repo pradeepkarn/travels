@@ -232,20 +232,20 @@
 
 })();
 
-document.addEventListener('change', function (event) {
-  const target = event.target;
+// document.addEventListener('change', function (event) {
+//   const target = event.target;
 
-  if (target && target.type === 'file') {
-    const selectedFile = target.files[0];
+//   if (target && target.type === 'file') {
+//     const selectedFile = target.files[0];
 
-    if (selectedFile) {
-      const fileName = selectedFile.name;
-      const urlSafePattern = /^[a-zA-Z0-9-_]+(\.[a-zA-Z0-9]+)?$/;
+//     if (selectedFile) {
+//       const fileName = selectedFile.name;
+//       const urlSafePattern = /^[a-zA-Z0-9-_]+(\.[a-zA-Z0-9]+)?$/;
 
-      if (!urlSafePattern.test(fileName)) {
-        alert('Please select a file with a URL-safe name.');
-        target.value = ''; // Clear the input field
-      }
-    }
-  }
-});
+//       if (!urlSafePattern.test(fileName)) {
+//         alert('Please select a file with a URL-safe name.');
+//         target.value = ''; // Clear the input field
+//       }
+//     }
+//   }
+// });

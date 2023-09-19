@@ -19,6 +19,7 @@ $login_routes = [
 $public_routes = [
     "" => "Travel_home_ctrl@index@name.home",
     "/" => "Travel_home_ctrl@index@name.homeSlash",
+    "/fetch-packages-by-cat-id-ajax" => "Travel_home_ctrl@fetch_packages_by_catid@name.fetchPkgAjax",
     "/about-us" => "Travel_about_ctrl@index@name.aboutUs",
     "/visa" => "Travel_visa_ctrl@index@name.visa",
     "/tours" => "Travel_tours_ctrl@index@name.tours",
@@ -147,7 +148,7 @@ $ajax = [
     '/send-contact-message-ajax' => 'Contact_front@send_message@name.sendContactMessageAjax'
 ];
 $pages = [
-    "/{slug}" => 'Page_front@index@name.pageBySlug'
+    "/{slug}" => 'Travel_page_ctrl@index@name.pageBySlug'
 ];
 $routes = array_merge(
     $public_routes,

@@ -1,4 +1,3 @@
-<div id="set-template">
     <style>
         /* Set the height and width for the cards */
         .trend-item {
@@ -28,8 +27,8 @@
 
             <div class="section-title text-center text-lg-start">
                 <h4 class="mb-1 theme1">Top Pick</h4>
-                <h2 class="mb-1">DUBAI Summer Delights</h2>
-                <p>Create unforgettable memories with your family in Dubai this summer.</p>
+                <h2 class=""><?php echo $context->data->cat_name??"All Packages"; ?></h2>
+                <p><?php echo $context->data->cat_details??"Create unforgettable memories with your family in Dubai this summer."; ?></p>
             </div>
             <div class="row">
                 <?php
@@ -52,7 +51,7 @@
                                     </div>
                                 </div>
                                 <h5 class="theme mb-1"><i class="flaticon-location-pin"></i> <?php echo $pkg->city; ?></h5>
-                                <h3 class="mb-1"><a href="/<?php echo home.route('pageBySlug',['slug'=>$pkg->slug]); ?>"><?php echo pk_excerpt($pkg->title, 20); ?></a></h3>
+                                <h3 class="mb-1"><a href="tour-single.php"><?php echo pk_excerpt($pkg->title, 20); ?></a></h3>
                                 <div class="rating-main d-flex align-items-center pb-2">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
@@ -84,4 +83,3 @@
             </div>
         </div>
     </section>
-</div>
