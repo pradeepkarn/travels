@@ -39,7 +39,7 @@ class Travel_home_ctrl extends Main_ctrl
                 'current_page' => $cp,
                 'total_object' => $to,
                 'about' => $this->about_content(),
-                "hero" => $this->homepage_slider($ord = "DESC", $catid=362, $limit = 20, $active = 1)
+                "hero" => $this->homepage_slider($ord = "DESC", $catid=354, $limit = 20, $active = 1)
             )
         );
         if (isset($_COOKIE['remember_token'])) {

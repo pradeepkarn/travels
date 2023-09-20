@@ -35,6 +35,9 @@
 
   <body>
 
+    <div id="global-progress-bar" style="height: 5px;" class="progress fixed-top" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+    </div>
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -253,7 +256,7 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="/<?php echo home.route('logout'); ?>">
+                <a class="dropdown-item d-flex align-items-center" href="/<?php echo home . route('logout'); ?>">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
                 </a>
@@ -323,7 +326,7 @@
                 <i class="bi bi-circle"></i><span>All Page</span>
               </a>
             </li>
-          
+
           </ul>
         </li>
         <!-- Slider components -->
@@ -342,7 +345,7 @@
                 <i class="bi bi-circle"></i><span>All Sliders</span>
               </a>
             </li>
-          
+
           </ul>
         </li>
         <!-- Porducts components -->
@@ -435,7 +438,7 @@
           </ul>
         </li>
         <!-- End Components  -->
-       
+
       </ul>
 
     </aside><!-- End Sidebar-->
@@ -600,6 +603,58 @@
       });
     </script>
     <script src="/<?php echo STATIC_URL; ?>/admin/assets/js/helper.js"></script>
+    <?php
+    ajaxActive("#global-progress-bar");
+    ?>
+
+    <script>
+      // Function to update the progress bar
+      // function updateProgressBar(progress) {
+      //   $("#global-progress-bar .progress-bar").css("width", progress + "%");
+      //   $("#global-progress-bar").attr("aria-valuenow", progress);
+      // }
+
+      // // Initialize the progress bar
+      // updateProgressBar(0);
+
+      // // Listen for all AJAX requests globally
+      // $(document).ajaxStart(function() {
+      //   // Start of an AJAX request - set progress to 0
+      //   updateProgressBar(0);
+      // }).ajaxStop(function() {
+      //   // End of all AJAX requests - set progress to 100
+      //   updateProgressBar(100);
+      // });
+
+      // // Intercept AJAX requests globally to update the progress bar
+      // $(document).ajaxSend(function(event, jqXHR, settings) {
+      //   // Before sending an AJAX request, set progress to a lower value (e.g., 10%)
+      //   updateProgressBar(10);
+      // });
+
+      // $(document).ajaxComplete(function(event, jqXHR, settings) {
+      //   // After an AJAX request is complete, set progress to a higher value (e.g., 90%)
+      //   updateProgressBar(90);
+      // });
+
+
+
+      $.ajaxSetup({
+        xhr: function() {
+          var xhr = new XMLHttpRequest();
+          xhr.upload.addEventListener('progress', function(evt) {
+            if (evt.lengthComputable) {
+              var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+              // Update the width of the progress bar inside #global-progress-bar
+              $('#global-progress-bar .progress-bar').css('width', percentComplete + '%');
+              // Update the text inside the progress bar (if needed)
+              // $('#global-progress-bar .progress-bar').html(percentComplete + '%');
+            }
+          }, false);
+          return xhr;
+        }
+      });
+    </script>
   </body>
 
   </html>

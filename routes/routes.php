@@ -207,7 +207,9 @@ function adminAuthMiddleware($next)
 
 // $routes = ROUTES;
 // Get the current request URI an
-$query_string = $_SERVER["QUERY_STRING"];
+// print_r($_SERVER);
+
+$query_string = $_SERVER["QUERY_STRING"]??$_GET;
 $request_uri = REQUEST_URI;
 $request_method = $_SERVER['REQUEST_METHOD'];
 // Iterate through the routes to find a match
