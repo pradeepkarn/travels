@@ -31,7 +31,14 @@ class Travel_page_ctrl extends Main_ctrl
                 'req' => obj($req),
                 'title' => $page->title,
                 'content' => $page->content,
-                'banner' => $page->banner
+                'banner' => $page->banner,
+                'imgs' => $page->imgs,
+                'days' => $page->days,
+                'max_people' => $page->max_people,
+                'min_age' => $page->min_age,
+                'pickup' => $page->pickup,
+                'price' => $page->price,
+                'languages' => $page->languages,
             )
         );
         $this->render_layout($context);

@@ -43,6 +43,16 @@ if ($pd->json_obj != "") {
                         <?php } ?>
                         <?php ?>
                     </select>
+                    <div class="row">
+                        <div class="col">
+                            <label for="">Latitude</label>
+                            <input type="text" class="form-control my-2" name="lat" value="<?php echo $pd->lat??null; ?>">
+                        </div>
+                        <div class="col">
+                            <label for="">Longitude</label>
+                            <input type="text" class="form-control my-2" name="lon" value="<?php echo $pd->lon??null; ?>">
+                        </div>
+                    </div>
                     <textarea class="tinymce-editor" name="content" id="mce_0" aria-hidden="true"><?php echo $pd->content; ?></textarea>
                     <h4>Tags</h4>
                     <textarea class="form-control" name="meta_tags" aria-hidden="true"><?php echo $meta_tags; ?></textarea>
@@ -53,10 +63,27 @@ if ($pd->json_obj != "") {
                     <h4>Banner</h4>
                     <input accept="image/*" id="image-input" type="file" name="banner" class="form-control my-3">
                     <img style="width:100%; max-height:300px; object-fit:contain;" id="banner" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pd->banner; ?>" alt="<?php echo $pd->banner; ?>">
+                    <div id="image-container"></div>
+                    <button type="button" class="btn btn-secondary text-white mt-2" id="add-image">Images <i class="bi bi-plus"></i> </button>
                     <hr>
+                    <?php
+                        $imgs = get_image_list($pd->imgs);
+                        $moreimgcount = count($imgs);
+                        // myprint($imgs);
+                    ?>
+                    <h4>Total more images count <?php echo $moreimgcount; ?> </h4>
+                    <div style="max-height: 200px; overflow-y:scroll; background-color: rgba(0,0,0,0.2);">
+                        <?php
+                        foreach ($imgs as $key => $img) { ?>
+                            <button style="margin: 10px;" type="button" class="btn btn-danger delete-more-img" data-img-src="<?php echo $img; ?>" data-content-id="<?php echo $pd->id; ?>">Delete <i class="bi bi-arrow-down"></i></button>
+                            <img style="width: 100%; padding: 10px;" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $img; ?>" alt="<?php echo $pd->title; ?>">
+                            <hr>
+                        <?php } ?>
+                    </div>
+
                     <h4>Price/Unit</h4>
                     <input type="number" scope="any" name="price" value="<?php echo $pd->price; ?>" class="form-control my-3" placeholder="Price">
-                   
+
                     <h4>Min. Age</h4>
                     <input type="text" name="min_age" value="<?php echo $pd->min_age; ?>" class="form-control my-3" placeholder="Min age">
 
@@ -71,10 +98,10 @@ if ($pd->json_obj != "") {
 
                     <h4>No. of days for tours</h4>
                     <input type="number" scope="any" name="days" value="<?php echo $pd->days; ?>" class="form-control my-3" placeholder="Days for tours">
-                   
+
                     <h4>City</h4>
-                    <input type="text"  name="city" value="<?php echo $pd->city; ?>" class="form-control my-3" placeholder="City">
-                   
+                    <input type="text" name="city" value="<?php echo $pd->city; ?>" class="form-control my-3" placeholder="City">
+
                     <div class="d-grid">
                         <button id="update-package-btn" type="button" class="btn btn-primary my-3">Update</button>
                     </div>
@@ -112,5 +139,42 @@ if ($pd->json_obj != "") {
             });
         }
     }
+</script>
+<script>
+    $(document).ready(function () {
+        // Attach a click event handler to the cat-items
+        $('.delete-more-img').on('click', function () {
+            var imgSrc = $(this).data('img-src');
+            var contentId = $(this).data('content-id');
+            // Make an AJAX request to the server
+            $.ajax({
+                url: '/<?php echo home.route('packageDeleteMoreImgAjax'); ?>', // Replace with your server URL
+                type: 'POST', // You can change this to 'GET' if needed
+                data: { content_id: contentId, img_src:imgSrc }, // Send the cat_id to the server
+                success: function (res) {
+                    if (res.success===true) {
+                       alert(res.msg);
+                       location.reload();
+                    }else if (res.success===false){
+                        alert(res.msg);
+                    }else{
+                        alert("Something went wrong");
+                    }
+                },
+                error: function (error) {
+                    console.error('AJAX error:', error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#add-image').on('click', function() {
+            // Create a new image input field
+            var newInput = '<input accept="image/*" type="file" name="moreimgs[]" class="form-control my-3">';
+            $('#image-container').append(newInput);
+        });
+    });
 </script>
 <?php pkAjax_form("#update-package-btn", "#update-new-package-form", "#res"); ?>

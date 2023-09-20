@@ -1343,3 +1343,37 @@ function getUrlSafeString($inputString) {
 
   return $urlSafeString;
 }
+
+function get_image_list($jsn) {
+  if (json_decode($jsn??'[]')) {
+    return json_decode($jsn);
+  }
+  return [];
+}
+
+function modifyJsonArray($jsonString, $valueToDelete = null, $valueToInsert = null) {
+  // Decode the JSON string into a PHP array
+  $array = json_decode($jsonString);
+
+  // Check if JSON decoding was successful
+  if ($array === null && json_last_error() !== JSON_ERROR_NONE) {
+      // Return an error message or handle the error as needed
+      return false;
+  }
+
+  // Delete a value if specified
+  if ($valueToDelete !== null) {
+      $key = array_search($valueToDelete, $array);
+      if ($key !== false) {
+          array_splice($array, $key, 1);
+      }
+  }
+
+  // Insert a value if specified
+  if ($valueToInsert !== null) {
+      $array[] = $valueToInsert;
+  }
+
+  // Encode the modified array back to JSON
+  return json_encode($array);
+}

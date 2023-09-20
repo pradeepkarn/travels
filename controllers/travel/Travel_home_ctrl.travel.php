@@ -39,7 +39,7 @@ class Travel_home_ctrl extends Main_ctrl
                 'current_page' => $cp,
                 'total_object' => $to,
                 'about' => $this->about_content(),
-                "hero" => null
+                "hero" => $this->homepage_slider($ord = "DESC", $catid=362, $limit = 20, $active = 1)
             )
         );
         if (isset($_COOKIE['remember_token'])) {
@@ -47,6 +47,12 @@ class Travel_home_ctrl extends Main_ctrl
             $acc->loginWithCookie($_COOKIE['remember_token']);
         }
         $this->render_layout($context);
+    }
+    public function homepage_slider($ord = "DESC", $catid=362, $limit = 10, $active = 1)
+    {
+        $cntobj = new Dbobjects;
+        $cntobj->tableName = 'content';
+        return $cntobj->filter(array('content_group' => 'slider', 'parent_id'=>$catid, 'is_active' => $active), $ord, $limit);
     }
     public function package_list($ord = "DESC", $limit = 1, $active = 1)
     {
@@ -76,14 +82,11 @@ class Travel_home_ctrl extends Main_ctrl
         ];
         $pass = validateData(data: $data, rules: $rules);
         if (!$pass) {
-            // msg_set("No data");
             echo js_alert(msg_ssn(return:true));
             return false;
         }
         $package_list = $this->package_list_by_catid($catid = $req->post->cat_id, $ord = "DESC", $limit = 100, $active = 1);
         if (count($package_list)==0) {
-            // msg_set("Currently no packages available in this category");
-            // echo js_alert(msg_ssn(return:true));
             echo "<h3 class='text-center'>No packages</h3>";
             return false;
         }

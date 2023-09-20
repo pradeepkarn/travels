@@ -86,6 +86,7 @@ $admin_routes = [
     '/admin/package/list' => 'Package_ctrl@list@name.packageList',
     '/admin/package/trash-list' => 'Package_ctrl@trash_list@name.packageTrashList',
     '/admin/package/edit/{id}' => 'Package_ctrl@edit@name.packageEdit',
+    '/admin/package/delete-more-img-ajax' => 'Package_ctrl@delete_more_img@name.packageDeleteMoreImgAjax',
     '/admin/package/trash/{id}' => 'Package_ctrl@move_to_trash@name.packageTrash',
     '/admin/package/restore/{id}' => 'Package_ctrl@restore@name.packageRestore',
     '/admin/package/delete/{id}' => 'Package_ctrl@delete_trash@name.packageDelete',
@@ -264,9 +265,9 @@ foreach ($routes as $route => $handler) {
             $controller = adminAuthMiddleware($controller);
         }
         // Apply middleware for profile complete in public routes
-        if (in_array($route, array_keys($public_routes))) {
-            $controller = userProfileCompleteMiddleware($controller);
-        }
+        // if (in_array($route, array_keys($public_routes))) {
+        //     $controller = userProfileCompleteMiddleware($controller);
+        // }
 
         // Call the method with any named parameters and GET parameters
         $params = array_intersect_key($matches, array_flip(array_filter(array_keys($matches), 'is_string')));

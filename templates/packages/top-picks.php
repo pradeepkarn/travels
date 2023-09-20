@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <h5 class="theme mb-1"><i class="flaticon-location-pin"></i> <?php echo $pkg->city; ?></h5>
-                                <h3 class="mb-1"><a href="tour-single.php"><?php echo pk_excerpt($pkg->title, 20); ?></a></h3>
+                                <h3 class="mb-1"><a href="/<?php echo home.route('pageBySlug',['slug'=>$pkg->slug]); ?>"><?php echo pk_excerpt($pkg->title, 20); ?></a></h3>
                                 <div class="rating-main d-flex align-items-center pb-2">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>

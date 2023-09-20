@@ -1,5 +1,8 @@
 
-<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/bg/bg1.jpg);">
+<?php 
+$abt = obj($context->data->about);
+?>
+<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $abt->banner; ?>);">
     <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/shape8.png);"></div>
     <div class="breadcrumb-outer">
         <div class="container">
@@ -25,20 +28,13 @@
                 <div class="col-lg-6 ps-4">
                     <div class="about-content text-center text-lg-start">
                         <h4 class="theme d-inline-block mb-0">Get To Know Us</h4>
-                        <h2 class="border-b mb-2 pb-1">Explore All Tour of the world with us.</h2>
-                        <p class="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <div class="about-listing">
-                            <ul class="d-flex justify-content-between">
-                                <li><i class="bi bi-pin-map-fill"></i> Tour Guide</li>
-                                <li><i class="bi bi-briefcase"></i> Friendly Price</li>
-                                <li><i class="bi bi-folder-check"></i> Reliable Tour Package</li>
-                            </ul>
-                        </div>
+                        <h2 class="border-b mb-2 pb-1"><?php echo $abt->title; ?></h2>
+                        <?php echo $abt->content; ?>
                     </div>
                 </div>
                 <div class="col-lg-6 mb-4 pe-4">
                     <div class="about-image" style="animation:none; background:transparent;">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/travel.png" alt="">
+                        <img src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $abt->banner; ?>" alt="<?php echo $abt->title; ?>">
                     </div>
                 </div>
                 <div class="col-lg-12">

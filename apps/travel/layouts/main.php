@@ -22,6 +22,21 @@
     <link rel="stylesheet" href="/<?php echo STATIC_URL; ?>/owl/dist/assets/owl.theme.default.min.css">
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/jquery-3.5.1.min.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/owl/dist/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function swalert(obj) {
+            Swal.fire(
+                obj.title,
+                obj.msg,
+                obj.icon
+            ).then(() => {
+                if (obj.gotoLink) {
+                    window.location.href = obj.gotoLink;
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -38,7 +53,7 @@
                     <ul>
                         <li><a href="#" class="white"><i class="icon-calendar white"></i> Thursday, Mar 26, 2021</a></li>
                         <li><a href="#" class="white"><i class="icon-location-pin white"></i> Hollywood, America</a></li>
-                        <li><a href="#" class="white"><i class="icon-clock white"></i> Mon-Fri: 10 AM – 5 PM</a></li>
+                        <li><a href="#" class="white"><i class="icon-clock white"></i> Mon-Fri: 10 AM - 5 PM</a></li>
                     </ul>
                 </div>
                 <div class="links float-right">
@@ -67,14 +82,12 @@
                             <ul class="nav navbar-nav" id="responsive-menu">
                                 <li class="dropdown submenu active">
                                     <a href="/<?php echo home; ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
-
                                 </li>
                                 <li><a href="/<?php echo home . route('aboutUs'); ?>">About Us</a></li>
                                 <li><a href="/<?php echo home . route('visa'); ?>">Visa</a></li>
 
                                 <li class="submenu dropdown">
                                     <a href="/<?php echo home . route('tours'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <i class="icon-arrow-down" aria-hidden="true"></i></a>
-
                                 </li>
                                 <li class="submenu dropdown">
                                     <a href="/<?php echo home . route('services'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <i class="icon-arrow-down" aria-hidden="true"></i></a>
@@ -82,13 +95,19 @@
                                 <li><a href="/<?php echo home . route('contact'); ?>">Contact</a></li>
 
 
-                                <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li>
+                                <!-- <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li> -->
                             </ul>
                         </div>
                         <div class="register-login d-flex align-items-center">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-3">
-                                <i class="icon-user"></i> Login/Register
-                            </a>
+                            <?php if (USER) : ?>
+                                <a href="/<?php echo home . route('logout'); ?>" class="me-3">
+                                    <i class="icon-user"></i> Logout
+                                </a>
+                            <?php else : ?>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-3">
+                                    <i class="icon-user"></i> Login/Register
+                                </a>
+                            <?php endif; ?>
                             <a href="#" class="nir-btn white">Book Now</a>
                         </div>
                         <div id="slicknav-mobile"></div>
@@ -152,7 +171,7 @@
             </div>
         </div>
         <div class="modal fade log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="post-tabs">
@@ -177,21 +196,22 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <h4 class="text-center border-b pb-2">Login</h4>
-                                            <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                            <!-- <div class="log-reg-button d-flex align-items-center justify-content-between">
                                                 <button type="submit" class="btn btn-fb">
                                                     <i class="fab fa-facebook"></i> Login with Facebook
                                                 </button>
                                                 <button type="submit" class="btn btn-google">
                                                     <i class="fab fa-google"></i> Login with Google
                                                 </button>
-                                            </div>
+                                            </div> -->
                                             <hr class="log-reg-hr position-relative my-4 overflow-visible">
-                                            <form method="post" action="#" name="contactform" id="contactform">
+                                            <did id="res"></did>
+                                            <form id="contactform" action="/<?php echo home . route('userLoginAjax'); ?>" method="post">
                                                 <div class="form-group mb-2">
-                                                    <input type="text" name="user_name" class="form-control" id="fname" placeholder="User Name or Email Address">
+                                                    <input type="text" name="username" class="form-control" id="fname" placeholder="User Name or Email Address">
                                                 </div>
                                                 <div class="form-group mb-2">
-                                                    <input type="password" name="password_name" class="form-control" id="lpass" placeholder="Password">
+                                                    <input type="password" name="password" class="form-control" id="lpass" placeholder="Password">
                                                 </div>
                                                 <div class="form-group mb-2">
                                                     <input type="checkbox" class="custom-control-input" id="exampleCheck">
@@ -199,10 +219,15 @@
                                                     <a class="float-end" href="#">Lost your password?</a>
                                                 </div>
                                                 <div class="comment-btn mb-2 pb-2 text-center border-b">
-                                                    <input type="submit" class="nir-btn w-100" id="submit" value="Login">
+                                                    <button type="button" class="nir-btn w-100" id="login-btn">Login</button>
                                                 </div>
-                                                <p class="text-center">Don't have an account? <a href="#" class="theme">Register</a></p>
+                                                
                                             </form>
+                                            <?php
+
+                                            pkAjax_form("#login-btn", "#contactform", "#res");
+
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -216,37 +241,91 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <h4 class="text-center border-b pb-2">Register</h4>
-                                            <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                            <!-- <div class="log-reg-button d-flex align-items-center justify-content-between">
                                                 <button type="submit" class="btn btn-fb">
                                                     <i class="fab fa-facebook"></i> Login with Facebook
                                                 </button>
                                                 <button type="submit" class="btn btn-google">
                                                     <i class="fab fa-google"></i> Login with Google
                                                 </button>
-                                            </div>
+                                            </div> -->
                                             <hr class="log-reg-hr position-relative my-4 overflow-visible">
-                                            <form method="post" action="#" name="contactform1" id="contactform1">
-                                                <div class="form-group mb-2">
-                                                    <input type="text" name="user_name" class="form-control" id="fname1" placeholder="User Name">
+                                            <form id="reg-form" action="/<?php echo home . route('registerAjax'); ?>" method="post">
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label"><?php echo lang('global')->email ?? 'Email'; ?></label>
+                                                    <input type="email" class="form-control email" id="email" name="email" required>
+                                                    <div class="d-grid">
+                                                        <button type="button" id="send-otp-btn" class="btn btn-sm btn-primary my-2">Send OTP</button>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mb-2">
-                                                    <input type="text" name="user_name" class="form-control" id="femail" placeholder="Email Address">
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label"><?php echo lang('global')->otp ?? 'OTP'; ?></label>
+                                                    <input type="email" class="form-control" id="email" name="otp" required>
                                                 </div>
-                                                <div class="form-group mb-2">
-                                                    <input type="password" name="password_name" class="form-control" id="lpass1" placeholder="Password">
+                                                <div class="mb-3">
+                                                    <label for="password" class="form-label"><?php echo lang('global')->password ?? 'Password'; ?></label>
+                                                    <input type="password" class="form-control" id="password" name="password" required>
                                                 </div>
-                                                <div class="form-group mb-2">
-                                                    <input type="password" name="password_name" class="form-control" id="lrepass" placeholder="Re-enter Password">
+                                                <div class="mb-3">
+                                                    <label for="password" class="form-label"><?php echo lang('global')->confirm_password ?? 'Confirm Password'; ?></label>
+                                                    <input type="password" class="form-control" id="password" name="confirm_password" required>
                                                 </div>
-                                                <div class="form-group mb-2 d-flex">
-                                                    <input type="checkbox" class="custom-control-input" id="exampleCheck1">
-                                                    <label class="custom-control-label mb-0 ms-1 lh-1" for="exampleCheck1">I have read and accept the Terms and Privacy Policy?</label>
+
+                                                <div class="my-4">
+                                                    <input type="checkbox" name="terms_and_conditions_and_privacy_policy" id="tnc">
+                                                    <a class="text-primary" target="_blank" href="/<?php echo home . route('pageBySlug', ['slug' => 'privacy-policy']); ?>"><?php echo lang('global')->privacy_policy ?? 'Privacy policy'; ?></a> <?php echo lang('global')->and ?? 'and'; ?>
+                                                    <a class="text-primary" target="_blank" href="/<?php echo home . route('pageBySlug', ['slug' => 'terms-of-use']); ?>"><?php echo lang('global')->terms_of_use ?? 'Termas of user'; ?>.</a>
+                                                    <i class="fas fa-arrow-left"></i>
+                                                    <?php echo lang('global')->i_agree ?? 'I agree'; ?>
                                                 </div>
-                                                <div class="comment-btn mb-2 pb-2 text-center border-b">
-                                                    <input type="submit" class="nir-btn w-100" id="submit1" value="Register">
+                                                <div class="d-grid gap-2">
+                                                    <button disabled id="reg-btn" type="button" class="btn btn-primary"><?php echo lang('nav')->register ?? 'Register'; ?></button>
+                                                    
                                                 </div>
-                                                <p class="text-center">Already have an account? <a href="#" class="theme">Login</a></p>
                                             </form>
+                                            <?php
+
+                                            send_to_server_wotf("#send-otp-btn", ".email", "handleOtpSend", route('sendOtpAjax'));
+
+                                            pkAjax_form("#reg-btn", "#reg-form", "#res");
+                                            ?>
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    const checkbox = document.getElementById('tnc');
+                                                    const registerBtn = document.getElementById('reg-btn');
+
+                                                    checkbox.addEventListener('change', function() {
+                                                        if (checkbox.checked) {
+                                                            registerBtn.disabled = false;
+                                                        } else {
+                                                            registerBtn.disabled = true;
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                            <script>
+                                                function handleOtpSend(res) {
+                                                    if (res.success === true) {
+                                                        swalert({
+                                                            title: 'Success',
+                                                            msg: res.msg,
+                                                            icon: 'success'
+                                                        });
+                                                    } else if (res.success === false) {
+                                                        swalert({
+                                                            title: 'Failed',
+                                                            msg: res.msg,
+                                                            icon: 'error'
+                                                        });
+                                                    } else {
+                                                        swalert({
+                                                            title: 'Failed',
+                                                            msg: 'Something went wrong',
+                                                            icon: 'error'
+                                                        });
+                                                    }
+                                                }
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

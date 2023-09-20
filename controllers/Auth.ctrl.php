@@ -503,7 +503,7 @@ class Auth extends Main_ctrl
             header("Location: /" . home . route('adminLogin'));
             exit;
         }
-        header("Location: /" . home . route('userLogin'));
+        header("Location: /" . home);
     }
 
     ############################################### pages and ajax

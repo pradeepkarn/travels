@@ -125,7 +125,7 @@ class Package_ctrl
             'pickup' => 'required|string',
             'languages' => 'required|string',
         ];
-        
+
         $pass = validateData(data: $data, rules: $rules);
         if (!$pass) {
             echo js_alert(msg_ssn("msg", true));
@@ -155,6 +155,8 @@ class Package_ctrl
             $arr['max_people'] = $request->max_people;
             $arr['pickup'] = $request->pickup;
             $arr['languages'] = $request->languages;
+            $arr['lat'] = $request->lat??null;
+            $arr['lon'] = $request->lon??null;
             $moreimg = [];
             if (isset($_FILES['moreimgs'])) {
                 $fl = $_FILES['moreimgs'];
@@ -277,6 +279,28 @@ class Package_ctrl
             $arr['max_people'] = $request->max_people;
             $arr['pickup'] = $request->pickup;
             $arr['languages'] = $request->languages;
+            $arr['lat'] = $request->lat??null;
+            $arr['lon'] = $request->lon??null;
+            $imsgjsn = json_decode($content->imgs??'[]',true);
+            $moreimg = [];
+            if (isset($_FILES['moreimgs'])) {
+                $fl = $_FILES['moreimgs'];
+                for ($i = 0; $i < count($fl['name']); $i++) {
+                    if ($fl['name'][$i] != '' && $fl['error'][$i] === UPLOAD_ERR_OK) {
+                        $ext = pathinfo($fl['name'][$i], PATHINFO_EXTENSION);
+                        $imgstr = getUrlSafeString($fl['name'][$i]);
+                        $moreimgname = str_replace(" ", "_", $imgstr) . uniqid("_moreimg_") . "." . $ext;
+                        $dir = MEDIA_ROOT . "images/pages/" . $moreimgname;
+                        $upload = move_uploaded_file($fl['tmp_name'][$i], $dir);
+                        if ($upload) {
+                            $moreimg[] = $moreimgname;
+                        }
+                    }
+                }
+                $newimgs = array_merge($imsgjsn,$moreimg);
+                $arr['imgs'] = json_encode($newimgs);
+            }
+
             if ($request->banner['name'] != "" && $request->banner['error'] == 0) {
                 $ext = pathinfo($request->banner['name'], PATHINFO_EXTENSION);
                 $imgstr = getUrlSafeString($request->title);
@@ -305,6 +329,67 @@ class Package_ctrl
                 echo js_alert('package not updated, check slug or content data');
                 exit;
             }
+        }
+    }
+    function delete_more_img($req = null)
+    {
+        header('Content-Type: application/json');
+        $datavald = $_POST;
+        $req = obj($_POST);
+        $rules = [
+            'content_id' => 'required|integer',
+            'img_src' => 'required|string',
+        ];
+        $pass = validateData(data: $datavald, rules: $rules);
+        $data = null;
+        if (!$pass) {
+            $data['msg'] = msg_ssn(return: true, lnbrk: "<br>");
+            $data['success'] = false;
+            $data['data'] = null;
+            echo json_encode($data);
+            exit;
+        }
+        $db = new Dbobjects;
+        $pdo = $db->conn;
+        $pdo->beginTransaction();
+        $db->tableName = "content";
+        $content = $db->pk($req->content_id);
+        if ($content) {
+            $content = obj($content);
+            $imgsjson = modifyJsonArray(jsonString: $content->imgs, valueToDelete: $req->img_src);
+            if ($imgsjson !== false) {
+                $imgpath = RPATH . "/media/images/pages/" . $req->img_src;
+                if ($req->img_src != null && file_exists($imgpath)) {
+                    unlink($imgpath);
+                }
+                try {
+                    $db->insertData['imgs'] = $imgsjson;
+                    $db->pk($req->content_id);
+                    $db->update();
+                    $pdo->commit();
+                    msg_set("Image deleted");
+                    $data['msg'] = msg_ssn(return: true,lnbrk:"\n");
+                    $data['success'] = true;
+                    $data['data'] = null;
+                    echo json_encode($data);
+                    exit;
+                } catch (PDOException $th) {
+                    $pdo->rollback();
+                    msg_set("Image not deleted");
+                    $data['msg'] = msg_ssn(return: true,lnbrk:"\n");
+                    $data['success'] = false;
+                    $data['data'] = null;
+                    echo json_encode($data);
+                    exit;
+                }
+            }
+        } else {
+            msg_set("content not found");
+            $data['msg'] = msg_ssn(return: true,lnbrk:"\n");
+            $data['success'] = false;
+            $data['data'] = null;
+            echo json_encode($data);
+            exit;
         }
     }
     public function move_to_trash($req = null)

@@ -1,15 +1,16 @@
-
-
-<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $context->data->banner; ?>);">
+<?php 
+$pd = $context->data;
+?>
+<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pd->banner; ?>);">
     <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL;  ?>/tour/assets/images/shape8.png);"></div>
     <div class="breadcrumb-outer">
         <div class="container">
             <div class="breadcrumb-content text-center">
-                <h1 class="mb-3"><?php echo $context->data->title; ?></h1>
+                <h1 class="mb-3"><?php echo $pd->title; ?></h1>
                 <nav aria-label="breadcrumb" class="d-block">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><?php echo $context->data->title; ?></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $pd->title; ?></li>
                     </ul>
                 </nav>
             </div>
@@ -20,7 +21,7 @@
 
 
 <section class="trending pt-6 pb-0 bg-lgrey overflow-hidden">
-    <div class="tabs-navbar1 bg-white sticky1 bordernone py-3">
+    <!-- <div class="tabs-navbar1 bg-white sticky1 bordernone py-3">
         <ul id="tabs" class="nav nav-tabs bordernone mb-0 overflow-visible">
             <li class="active"><a data-toggle="tab" href="#highlight">Highlight</a></li>
             <li><a data-toggle="tab" href="#iternary">Iternary</a></li>
@@ -28,15 +29,15 @@
             <li><a data-toggle="tab" href="#single-comments">Comments</a></li>
             <li><a data-toggle="tab" href="#single-add-review" class="bordernone">Add Reviews</a></li>
         </ul>
-    </div>
+    </div> -->
     <div class="container">
         <div class="single-content">
             <div id="highlight">
                 <div class="single-full-title border-b mb-2 pb-2">
                     <div class="single-title text-center">
-                        <h2 class="mb-1">Adriatic Adventure–Zagreb to Athens</h2>
+                        <h2 class="mb-1"><?php echo $pd->title; ?></h2>
                         <div class="rating-main">
-                            <p class="mb-0 me-2 d-inline-block"><i class="icon-location-pin"></i> Greater London, United Kingdom</p>
+                            <!-- <p class="mb-0 me-2 d-inline-block"><i class="icon-location-pin"></i> Greater London, United Kingdom</p>
                             <div class="rating me-2 d-inline-block">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -44,34 +45,35 @@
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                             </div>
-                            <span>(1,186 Reviews)</span>
+                            <span>(1,186 Reviews)</span> -->
                         </div>
                     </div>
                 </div>
                 <div class="description-assets/images mb-4">
                     <div class="row">
-                        <div class="col"><img src="/<?php echo STATIC_URL; ?>/tour/assets/images/trending/trending1.jpg" alt="" class="rounded"></div>
-                        <div class="col"><img src="/<?php echo STATIC_URL; ?>/tour/assets/images/trending/trending2.jpg" alt="" class="rounded"></div>
-                        <div class="col"><img src="/<?php echo STATIC_URL; ?>/tour/assets/images/trending/trending3.jpg" alt="" class="rounded"></div>
+                        <?php
+                        $imgs = get_image_list($pd->imgs);
+                        foreach ($imgs as $key => $img) { ?>
+                            <div class="col"><img style="width:100%; height:300px; object-fit:cover;" src="/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $img; ?>" alt="<?php echo $pd->title; ?>" class="rounded"></div>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="description mb-2">
                     <h4>Description</h4>
-                    <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
-                    <p class="mb-0">The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
+                    <?php echo $pd->content; ?>
                 </div>
                 <div class="tour-includes mb-4">
                     <table>
                         <tbody>
                             <tr>
-                                <td><i class="fa fa-clock-o pink mr-1" aria-hidden="true"></i> 5 Days</td>
-                                <td><i class="fa fa-group pink mr-1" aria-hidden="true"></i> Max People : 26</td>
-                                <td><i class="fa fa-money pink mr-1" aria-hidden="true"></i>Price: 118 AED</td>
+                                <td><i class="fa fa-clock-o pink mr-1" aria-hidden="true"></i> <?php echo $pd->days; ?> Days</td>
+                                <td><i class="fa fa-group pink mr-1" aria-hidden="true"></i> Max People : <?php echo $pd->max_people; ?></td>
+                                <td><i class="fa fa-money pink mr-1" aria-hidden="true"></i>Price: <?php echo $pd->price; ?> AED</td>
                             </tr>
                             <tr>
-                                <td><i class="fa fa-user pink mr-1" aria-hidden="true"></i> Min Age : 10+</td>
-                                <td><i class="fa fa-map-signs pink mr-1" aria-hidden="true"></i> Pickup : Airport</td>
-                                <td><i class="fa fa-file-alt pink mr-1" aria-hidden="true"></i> Langauge - English, Thai</td>
+                                <td><i class="fa fa-user pink mr-1" aria-hidden="true"></i> Min Age : <?php echo $pd->min_age; ?>+</td>
+                                <td><i class="fa fa-map-signs pink mr-1" aria-hidden="true"></i> Pickup : <?php echo $pd->pickup; ?></td>
+                                <td><i class="fa fa-file-alt pink mr-1" aria-hidden="true"></i> Langauge - <?php echo $pd->languages; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,7 +83,7 @@
 
                     <div style="padding: 20px;">
                         <a href="booking.php"><button type="button" class="btn btn-primary">Book Now</button></a>
-                        <button type="button" class="btn btn-danger">AED 118</button>
+                        <button type="button" class="btn btn-danger">AED <?php echo $pd->price; ?></button>
                         <div>
                         </div>
                     </div>

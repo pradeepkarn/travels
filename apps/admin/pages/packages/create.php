@@ -31,6 +31,16 @@ $catlist = $context->cat_list;
                         <?php } ?>
                         <?php ?>
                     </select>
+                    <div class="row">
+                        <div class="col">
+                            <label for="">Latitude</label>
+                            <input type="text" class="form-control my-2" name="lat">
+                        </div>
+                        <div class="col">
+                            <label for="">Longitude</label>
+                            <input type="text" class="form-control my-2" name="lon">
+                        </div>
+                    </div>
                     <textarea class="tinymce-editor" name="content" id="mce_0" aria-hidden="true"></textarea>
                     <h4>Tags</h4>
                     <textarea class="form-control" name="meta_tags" aria-hidden="true"></textarea>
@@ -42,7 +52,7 @@ $catlist = $context->cat_list;
                     <input accept="image/*" id="image-input" type="file" name="banner" class="form-control my-3">
                     <img style="width:100%; max-height:300px; object-fit:contain;" id="banner" src="" alt="">
                     <div id="image-container"></div>
-                    <button type="button" class="btn btn-secondary text-white" id="add-image">Images <i class="bi bi-plus"></i> </button>
+                    <button type="button" class="btn btn-secondary text-white mt-2" id="add-image">Images <i class="bi bi-plus"></i> </button>
                     <hr>
                     <h4>Price/Unit</h4>
                     <input type="number" scope="any" name="price" class="form-control my-3" placeholder="Price">
