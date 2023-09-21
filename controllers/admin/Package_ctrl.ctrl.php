@@ -93,12 +93,20 @@ class Package_ctrl
     public function edit($req = null)
     {
         $req = obj($req);
+        $rvdb = new Dbobjects;
+        $rvdb->tableName = "review";
+        $arrv = null;
+        $arrv['item_id'] = $req->id;
+        $arrv['item_group'] = 'package';
+        $arrv['status'] = "published";
+        $reviewdata = $rvdb->filter($arrv);
         $context = (object) array(
             'page' => 'packages/edit.php',
             'data' => (object) array(
                 'req' => obj($req),
                 'package_detail' => $this->package_detail($req->id),
-                'cat_list' => $this->cat_list(limit: 1000)
+                'cat_list' => $this->cat_list(limit: 1000),
+                'reviewdata' => $reviewdata
             )
         );
         $this->render_main($context);

@@ -1,106 +1,8 @@
-
 <!-- Update the HTML structure to use square frames -->
-<div class="container">
-    <h1 class="text-center">Top Dubai Tours & Activities</h1>
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-between">
-                    <!-- Add your square frames here -->
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c.png" alt="Image 1">
-                        <h5>Airport Transfers</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c1.png" alt="Image 1">
-                        <h5>Hot Air Balloon</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c2.png" alt="Image 1">
-                        <h5>Camel & Horse Riding</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c3.png" alt="Image 1">
-                        <h5>Water Parks</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c4.png" alt="Image 1">
-                        <h5>Culture And Attractions</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c5.png" alt="Image 1">
-                        <h5>Culture And Attractions</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c6.png" alt="Image 1">
-                        <h5>Transfers</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c7.png" alt="Image 1">
-                        <h5>Nature & Wildlife</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>Adventures</h5>
-                    </div>
 
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="d-flex justify-content-between">
-                    <!-- Add your square frames here -->
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>Yacht Charter</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c9.png" alt="Image 1">
-                        <h5>Premium Tours</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c10.png" alt="Image 1">
-                        <h5>Cruise & Boat</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c11.png" alt="Image 1">
-                        <h5>Transfers</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>Premium Tours</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>Beach & Pool Clubs</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>SIM Card & Wifi Router</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>Culture & Attractions</h5>
-                    </div>
-                    <div class="square-frame">
-                        <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/circle/c8.png" alt="Image 1">
-                        <h5>Limosine Tours</h5>
-                    </div>
-                </div>
-            </div>
-            <!-- Repeat the structure for additional carousel items -->
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-
-
+<?php
+import("apps/travel/components/home/tours-and-activities-owl-car.php", $context);
+?>
 
 <section class="trending pt-6 pb-0 bg-lgrey">
     <div class="container-fluid">
@@ -123,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="trend-item rounded box-shadow">
                             <div class="trend-image position-relative">
@@ -350,6 +252,10 @@
                             <a href="#" class="nir-btn">Load More <i class="fa fa-long-arrow-alt-right"></i></a>
                         </div>
                     </div>
+                </div> -->
+                <div id="set-template">
+                    <!-- Package templates will be shown here on ajax call -->
+                    <?php echo render_template("packages/top-picks.php", $context); ?>
                 </div>
             </div>
             <div class="col-lg-3 pe-lg-3">

@@ -24,7 +24,7 @@
         /* Add a glowing blue border on hover */
     }
 </style>
-<section>
+<section style="max-height: 60vh; top:0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

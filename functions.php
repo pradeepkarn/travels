@@ -1377,3 +1377,22 @@ function modifyJsonArray($jsonString, $valueToDelete = null, $valueToInsert = nu
   // Encode the modified array back to JSON
   return json_encode($array);
 }
+
+function showStars($rating)
+{
+  $maxRating = 5;
+  $roundedRating = round($rating * 2) / 2; // Round to nearest 0.5
+
+  $starsHtml = '';
+  for ($i = 0; $i < $maxRating; $i++) {
+    if ($i < $roundedRating) {
+      $starsHtml .= '★'; // Full star
+    } else if ($i == floor($roundedRating) && $roundedRating % 1 !== 0) {
+      $starsHtml .= '½'; // Half star
+    } else {
+      $starsHtml .= '☆'; // Empty star
+    }
+  }
+
+  return $starsHtml;
+}

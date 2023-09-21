@@ -46,11 +46,11 @@ if ($pd->json_obj != "") {
                     <div class="row">
                         <div class="col">
                             <label for="">Latitude</label>
-                            <input type="text" class="form-control my-2" name="lat" value="<?php echo $pd->lat??null; ?>">
+                            <input type="text" class="form-control my-2" name="lat" value="<?php echo $pd->lat ?? null; ?>">
                         </div>
                         <div class="col">
                             <label for="">Longitude</label>
-                            <input type="text" class="form-control my-2" name="lon" value="<?php echo $pd->lon??null; ?>">
+                            <input type="text" class="form-control my-2" name="lon" value="<?php echo $pd->lon ?? null; ?>">
                         </div>
                     </div>
                     <textarea class="tinymce-editor" name="content" id="mce_0" aria-hidden="true"><?php echo $pd->content; ?></textarea>
@@ -58,6 +58,69 @@ if ($pd->json_obj != "") {
                     <textarea class="form-control" name="meta_tags" aria-hidden="true"><?php echo $meta_tags; ?></textarea>
                     <h4>Meta description</h4>
                     <textarea class="form-control" name="meta_description" aria-hidden="true"><?php echo $meta_desc; ?></textarea>
+
+                    <section id="add-review">
+                        <form id="add-review-form" action="/<?php echo home . "/admin/plugin_dir/add-review-ajax"; ?>">
+                            <label for="">Name</label>
+                            <input type="text" name="name_of_user" class="form-control">
+                            <label for="">Rating Point</label>
+                            <select name="star_point" class="form-select">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                            <label for="">Review Message</label>
+                            <input type="hidden" name="salon_id" value="<?php echo $pd->id; ?>">
+                            <textarea name="review_message" class="form-control"></textarea>
+                            <button id="add-review-btn" class="btn btn-primary" type="button">Add review</button>
+                        </form>
+                        <?php pkAjax_form("#add-review-btn", "#add-review-form", "#res"); ?>
+                        <h3>Reviews by admin</h3>
+                        <table class="table table-hover" style="max-height: 200px; overflow-y:scroll;">
+                            <tr>
+                                <th>Action</th>
+                                <th>Rating Point</th>
+                                <th>Message</th>
+                                <th>Cust. Name</th>
+                            </tr>
+                            <tr style="background-color: dodgerblue; color:white;">
+                                <th colspan="10">
+                                </th>
+                            </tr>
+                            <?php
+                           
+                            $rvdta = $context->reviewdata;
+
+                            foreach ($rvdta as $key => $dmrv) :
+                                $dmrv = obj($dmrv);
+                                $rtstar = showStars($rating = $dmrv->rating);
+                            ?>
+                                <tr>
+                                    <td>
+                                        <input type="radio" class="remove-this-dm-review<?php echo $dmrv->id; ?>" name="dm_review_id" value="<?php echo $dmrv->id; ?>">
+                                        <button id="<?php echo "remove-this-dm-review{$dmrv->id}"; ?>" type="button" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                    <td>
+                                        <b><?php echo $dmrv->rating . " " . $rtstar; ?></b>
+                                    </td>
+                                    <td><?php echo $dmrv->name; ?></td>
+                                    <td><?php echo $dmrv->message; ?></td>
+                                    <td class="text-end">
+                                        <?php pkAjax("#remove-this-dm-review{$dmrv->id}", "/admin/$plugin_dir/remove-this-dm-review-ajax", ".remove-this-dm-review{$dmrv->id}", "#res");
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach;
+
+                            ?>
+
+
+                        </table>
+                    </section>
+
+
                 </div>
                 <div class="col-md-4">
                     <h4>Banner</h4>
@@ -67,9 +130,9 @@ if ($pd->json_obj != "") {
                     <button type="button" class="btn btn-secondary text-white mt-2" id="add-image">Images <i class="bi bi-plus"></i> </button>
                     <hr>
                     <?php
-                        $imgs = get_image_list($pd->imgs);
-                        $moreimgcount = count($imgs);
-                        // myprint($imgs);
+                    $imgs = get_image_list($pd->imgs);
+                    $moreimgcount = count($imgs);
+                    // myprint($imgs);
                     ?>
                     <h4>Total more images count <?php echo $moreimgcount; ?> </h4>
                     <div style="max-height: 200px; overflow-y:scroll; background-color: rgba(0,0,0,0.2);">
@@ -141,27 +204,30 @@ if ($pd->json_obj != "") {
     }
 </script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Attach a click event handler to the cat-items
-        $('.delete-more-img').on('click', function () {
+        $('.delete-more-img').on('click', function() {
             var imgSrc = $(this).data('img-src');
             var contentId = $(this).data('content-id');
             // Make an AJAX request to the server
             $.ajax({
-                url: '/<?php echo home.route('packageDeleteMoreImgAjax'); ?>', // Replace with your server URL
+                url: '/<?php echo home . route('packageDeleteMoreImgAjax'); ?>', // Replace with your server URL
                 type: 'POST', // You can change this to 'GET' if needed
-                data: { content_id: contentId, img_src:imgSrc }, // Send the cat_id to the server
-                success: function (res) {
-                    if (res.success===true) {
-                       alert(res.msg);
-                       location.reload();
-                    }else if (res.success===false){
+                data: {
+                    content_id: contentId,
+                    img_src: imgSrc
+                }, // Send the cat_id to the server
+                success: function(res) {
+                    if (res.success === true) {
                         alert(res.msg);
-                    }else{
+                        location.reload();
+                    } else if (res.success === false) {
+                        alert(res.msg);
+                    } else {
                         alert("Something went wrong");
                     }
                 },
-                error: function (error) {
+                error: function(error) {
                     console.error('AJAX error:', error);
                 }
             });
