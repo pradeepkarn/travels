@@ -45,7 +45,7 @@ define("TOKEN_URL",$env->TOKEN_URL);
 define("USER_DATA_URL",$env->USER_DATA_URL);
 #Database password
 define("APP_SECRET",$env->APP_SECRET);
-#Database password
+#base uri
 define("BASEURI",$env->BASEURI);
 
 // General Codes

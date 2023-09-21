@@ -31,6 +31,21 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function swalert(obj) {
+            Swal.fire(
+                obj.title,
+                obj.msg,
+                obj.icon
+            ).then(() => {
+                if (obj.gotoLink) {
+                    window.location.href = obj.gotoLink;
+                }
+            })
+        }
+    </script>
   </head>
 
   <body>

@@ -14,7 +14,30 @@ if ($pd->json_obj != "") {
     }
 }
 ?>
-
+<script>
+    function commonCallbackHandler(res) {
+        if (res.success === true) {
+            swalert({
+                title: 'Success',
+                msg: res.msg,
+                icon: 'success'
+            });
+           location.reload();
+        } else if (res.success === false) {
+            swalert({
+                title: 'Failed',
+                msg: res.msg,
+                icon: 'error'
+            });
+        } else {
+            swalert({
+                title: 'Failed',
+                msg: 'Something went wrong',
+                icon: 'error'
+            });
+        }
+    }
+</script>
 <form action="/<?php echo home . route('packageUpdateAjax', ['id' => $pd->id]); ?>" id="update-new-package-form">
     <div class="card">
         <div class="card-body">
@@ -60,23 +83,21 @@ if ($pd->json_obj != "") {
                     <textarea class="form-control" name="meta_description" aria-hidden="true"><?php echo $meta_desc; ?></textarea>
 
                     <section id="add-review">
-                        <form id="add-review-form" action="/<?php echo home . "/admin/plugin_dir/add-review-ajax"; ?>">
-                            <label for="">Name</label>
-                            <input type="text" name="name_of_user" class="form-control">
-                            <label for="">Rating Point</label>
-                            <select name="star_point" class="form-select">
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-                            <label for="">Review Message</label>
-                            <input type="hidden" name="salon_id" value="<?php echo $pd->id; ?>">
-                            <textarea name="review_message" class="form-control"></textarea>
-                            <button id="add-review-btn" class="btn btn-primary" type="button">Add review</button>
-                        </form>
-                        <?php pkAjax_form("#add-review-btn", "#add-review-form", "#res"); ?>
+                        <label for="">Name</label>
+                        <input type="text" name="name_of_user" class="form-control review-data-send">
+                        <label for="">Rating Point</label>
+                        <select name="star_point" class="form-select review-data-send">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                        <label for="">Review Message</label>
+                        <input type="hidden" name="content_id" class="review-data-send" value="<?php echo $pd->id; ?>">
+                        <textarea name="review_message" class="form-control review-data-send"></textarea>
+                        <button id="add-review-btn" class="btn btn-primary" type="button">Add review</button>
+
                         <h3>Reviews by admin</h3>
                         <table class="table table-hover" style="max-height: 200px; overflow-y:scroll;">
                             <tr>
@@ -90,7 +111,7 @@ if ($pd->json_obj != "") {
                                 </th>
                             </tr>
                             <?php
-                           
+
                             $rvdta = $context->reviewdata;
 
                             foreach ($rvdta as $key => $dmrv) :
@@ -108,7 +129,8 @@ if ($pd->json_obj != "") {
                                     <td><?php echo $dmrv->name; ?></td>
                                     <td><?php echo $dmrv->message; ?></td>
                                     <td class="text-end">
-                                        <?php pkAjax("#remove-this-dm-review{$dmrv->id}", "/admin/$plugin_dir/remove-this-dm-review-ajax", ".remove-this-dm-review{$dmrv->id}", "#res");
+                                        <?php 
+                                        send_to_server_wotf("#remove-this-dm-review{$dmrv->id}",".remove-this-dm-review{$dmrv->id}","commonCallbackHandler",route('deleteReviewAjax', ['rg' => 'package']));
                                         ?>
                                     </td>
                                 </tr>
@@ -244,3 +266,6 @@ if ($pd->json_obj != "") {
     });
 </script>
 <?php pkAjax_form("#update-package-btn", "#update-new-package-form", "#res"); ?>
+<!-- for review -->
+
+<?php send_to_server_wotf("#add-review-btn", ".review-data-send", "commonCallbackHandler",  route('addReviewAjax', ['rg' => 'package'])); ?>

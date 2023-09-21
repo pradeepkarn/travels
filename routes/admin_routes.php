@@ -97,5 +97,8 @@ $admin_routes = [
     '/admin/comments/{cg}/edit/{id}/save-by-ajax' => 'Comment_admin_ctrl@update@name.commentUpdateAjax',
     '/admin/comments/{cg}/toggle-marked-comment' => 'Comment_admin_ctrl@toggle_approve@name.commentToggleMarked',
     '/admin/comments/{cg}/toggle-spam-comment' => 'Comment_admin_ctrl@toggle_spam@name.commentToggleSpam',
+    // reviews 
+    '/admin/reviews/{rg}/add-new' => 'Review_ctrl@add_review_ajax@name.addReviewAjax',
+    '/admin/reviews/{rg}/delete' => 'Review_ctrl@delete_review_ajax@name.deleteReviewAjax',
 
 ];
