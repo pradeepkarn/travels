@@ -31,6 +31,7 @@ class ComposerStaticInitc4a19b76d3b82431af5fc8587419040d
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Stripe\\' => 7,
         ),
         'R' => 
         array (
@@ -102,6 +103,10 @@ class ComposerStaticInitc4a19b76d3b82431af5fc8587419040d
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'React\\Stream\\' => 
         array (
