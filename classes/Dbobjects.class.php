@@ -18,18 +18,18 @@ class Dbobjects extends Dbh
         $this->conn = $this->conn();
     }
 
-    protected function setColNames($tableName)
+    public function setColNames($tableName)
     {
         //return $this->selectColNmaes($tableName);
-        $sql = "SELECT column_name,column_type,data_type
-                 FROM information_schema.columns
-                 WHERE table_schema = DATABASE()
-                 AND table_name = '$tableName'
-                 ORDER BY ordinal_position;";
+        $sql = "SELECT LOWER(column_name) AS column_name, LOWER(column_type) AS column_type, LOWER(data_type) AS data_type
+        FROM information_schema.columns
+        WHERE table_schema = DATABASE()
+        AND table_name = '$tableName'
+        ORDER BY ordinal_position;";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        $reults = $stmt->fetchAll();
-        return $reults;
+        $results = $stmt->fetchAll();
+        return $results;
     }
 
     public function dbtable($tableName)
@@ -82,6 +82,7 @@ class Dbobjects extends Dbh
         } else {
             $id = $this->id();
         }
+        // echo $this->sql;
         $this->sql = "SELECT * FROM `$this->tableName` ORDER BY `$id` $ord LIMIT $limit";
         return $this->show($this->sql);
     }
@@ -144,7 +145,7 @@ class Dbobjects extends Dbh
         $assoc_arr = null;
         return $this->show($this->sql);
     }
-    public function filter_distinct_whr($col = "", $assoc_arr=[], $ord = '', $limit = 99999999, $change_order_by_col = "")
+    public function filter_distinct_whr($col = "", $assoc_arr = [], $ord = '', $limit = 99999999, $change_order_by_col = "")
     {
         if ($change_order_by_col != "") {
             $id = $change_order_by_col;
@@ -204,7 +205,7 @@ class Dbobjects extends Dbh
             $arr[] = "`{$col}` = '" . addslashes($val) . "'";
         endforeach;
         $this->sql = "SELECT * FROM `$this->tableName` WHERE " . implode(" and ", $arr) . " ORDER BY `$id` $ord LIMIT 1;";
-        $this->qry = implode(" and ", $arr);
+        $this->qry = "`{$id}` = {$this->showOne($this->sql)[$id]}";
         $assoc_arr = null;
         return $this->showOne($this->sql);
     }
@@ -233,6 +234,12 @@ class Dbobjects extends Dbh
         $stmt->execute();
         $results = $stmt->fetch();
         return $results;
+    }
+    public function execSql($sql)
+    {
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 
     // read end
@@ -289,8 +296,11 @@ class Dbobjects extends Dbh
     public function create_sql()
     {
         $cols = $this->setColNames($this->tableName);
+        $keys = [];
+        $values = [];
         foreach ($cols as $key => $value) {
             if (isset($value['column_name'])) {
+                echo "ok";
                 if (isset($this->insertData[$value['column_name']])) {
                     $keys[] = "`{$value['column_name']}`";
                     $values[] = '"' . addslashes($this->insertData[$value['column_name']]) . '"';
@@ -362,12 +372,6 @@ class Dbobjects extends Dbh
         $stmt->execute();
         $cnt = $stmt->rowCount();
         return $cnt;
-    }
-    public function execSql($sql)
-    {
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute();
-        return $stmt->rowCount();
     }
     // delete end
 

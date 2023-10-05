@@ -34,7 +34,7 @@ $admin_routes = [
     '/admin/product/delete/{id}' => 'Product_ctrl@delete_trash@name.productDelete',
     '/admin/product/edit/{id}/save-by-ajax' => 'Product_ctrl@update@name.productUpdateAjax',
     '/admin/product/toggle-marked-page' => 'Product_ctrl@toggle_trending@name.productToggleMarked',
-    // 
+    // packages
     '/admin/package/create' => 'Package_ctrl@create@name.packageCreate',
     '/admin/package/create/save-by-ajax' => 'Package_ctrl@save@name.packageStoreAjax',
     '/admin/package/list' => 'Package_ctrl@list@name.packageList',

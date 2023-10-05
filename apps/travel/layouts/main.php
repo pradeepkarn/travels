@@ -40,7 +40,9 @@
 </head>
 
 <body>
-
+<div id="global-progress-bar" style="height: 5px;" class="progress fixed-top" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+    </div>
     <div id="preloader">
         <div id="status"></div>
     </div>
@@ -145,12 +147,12 @@
                         <div class="footer-links">
                             <h3 class="white">Quick link</h3>
                             <ul>
-                                <li><a href="about-us.php">About Us</a></li>
-                                <li><a href="about-us.php">Tours</a></li>
-                                <li><a href="about-us.php">Privacy Policy</a></li>
-                                <li><a href="about-us.php">Terms &amp; Conditions</a></li>
-                                <li><a href="about-us.php">Customer Service</a></li>
-                                <li><a href="#about-us.php">Return Policy</a></li>
+                                <li><a href="<?php echo BASEURI.route('aboutUs'); ?>">About Us</a></li>
+                                <li><a href="<?php echo BASEURI.route('tours'); ?>">Tours</a></li>
+                                <li><a href="<?php echo BASEURI; ?>/privacy-policy">Privacy Policy</a></li>
+                                <li><a href="<?php echo BASEURI; ?>/terms-of-use">Terms of use</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Return Policy</a></li>
                             </ul>
                         </div>
                     </div>
@@ -397,6 +399,26 @@
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/custom-swiper.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/custom-nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-FATj2IQnWfOi3nTl07PFPa7MHKC4lkZ9QqLwFoc5F5N3hKf2tFjCqLY02E1QDA5qP" crossorigin="anonymous"></script>
+    <?php
+    ajaxActive("#global-progress-bar");
+    ?>
+   <script>
+    $.ajaxSetup({
+        xhr: function() {
+          var xhr = new XMLHttpRequest();
+          xhr.upload.addEventListener('progress', function(evt) {
+            if (evt.lengthComputable) {
+              var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+              // Update the width of the progress bar inside #global-progress-bar
+              $('#global-progress-bar .progress-bar').css('width', percentComplete + '%');
+              // Update the text inside the progress bar (if needed)
+              // $('#global-progress-bar .progress-bar').html(percentComplete + '%');
+            }
+          }, false);
+          return xhr;
+        }
+      });
+    </script>
 </body>
 
 </html>
