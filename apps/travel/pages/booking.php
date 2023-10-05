@@ -1,5 +1,5 @@
-<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(assets/images/bg/bg1.jpg);">
-    <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(assets/images/shape8.png);"></div>
+<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/bg/bg1.jpg);">
+    <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/shape8.png);"></div>
     <div class="breadcrumb-outer">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -224,7 +224,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4">
                                     <div class="trend-item2 rounded">
-                                        <a href="destination-single1.html" style="background-image: url(assets/images/destination/aqua.png);"></a>
+                                        <a href="destination-single1.html" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/destination/aqua.png);"></a>
                                         <div class="color-overlay"></div>
                                     </div>
                                 </div>
