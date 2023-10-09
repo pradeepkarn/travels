@@ -18,8 +18,8 @@ final class Stripe_ctrl extends Main_ctrl
                     [
                         "quantity" => 1,
                         "price_data" => [
-                            "currency" => "inr",
-                            "unit_amount" => 20000,
+                            "currency" => "aed",
+                            "unit_amount" => 2000,
                             "product_data" => [
                                 "name" => "T-shirt"
                             ]
