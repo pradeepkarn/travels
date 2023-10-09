@@ -94,7 +94,7 @@ final class Stripe_ctrl extends Main_ctrl
                 'req' => obj($req)
             )
         );
-        $this->render_layout(context: $context, layout: "apps/travel/pages/stripe/cancelled.php");
+        $this->render_layout(context: $context, layout: "apps/travel/pages/stripe/cancel.php");
     }
 
     public function checkout($req = null)
