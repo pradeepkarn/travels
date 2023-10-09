@@ -2,8 +2,12 @@
 // Amount should be in cents, or paise
 final class Stripe_ctrl extends Main_ctrl
 {
-    function request_pay()
+    function request_pay($req=null)
     {
+        $req = obj($req);
+        $amt = $req->amt??100;
+        $amt = floatval($amt)*100;
+        $amt==0?("Location: " . BASEURI):null;
         try {
             $stripe_secret_key = STRIPE_SK;
 
@@ -19,15 +23,15 @@ final class Stripe_ctrl extends Main_ctrl
                         "quantity" => 1,
                         "price_data" => [
                             "currency" => "aed",
-                            "unit_amount" => 2000,
+                            "unit_amount" => $amt,
                             "product_data" => [
-                                "name" => "T-shirt"
+                                "name" => "Travel Packages"
                             ]
                         ]
                     ]
                 ],
                 'metadata' => [
-                    'order_id' => '6735',
+                    'order_id' => '100',
                 ],
             ]);
 
@@ -38,7 +42,7 @@ final class Stripe_ctrl extends Main_ctrl
                 'checkout_session_id' => $checkout_session->id,
                 'checkout_session_url' => $checkout_session->url
             ];
-            file_put_contents('checkout_logs.json', json_encode($logData));
+            file_put_contents('log/checkout_logs.json', json_encode($logData));
 
             // Redirect the user to the checkout session URL
             http_response_code(303);
@@ -49,7 +53,7 @@ final class Stripe_ctrl extends Main_ctrl
                 'status' => 'error',
                 'message' => 'Stripe API error: ' . $e->getMessage()
             ];
-            file_put_contents('checkout_logs.json', json_encode($logData));
+            file_put_contents('log/checkout_logs.json', json_encode($logData));
 
             // Handle the error (e.g., show an error page to the user)
             // Redirect the user to an error page or display an error message
@@ -61,7 +65,7 @@ final class Stripe_ctrl extends Main_ctrl
                 'status' => 'error',
                 'message' => 'Unexpected error: ' . $e->getMessage()
             ];
-            file_put_contents('checkout_logs.json', json_encode($logData));
+            file_put_contents('log/checkout_logs.json', json_encode($logData));
 
             // Handle the error (e.g., show an error page to the user)
             // Redirect the user to an error page or display an error message

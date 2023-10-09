@@ -82,7 +82,7 @@ $pd = $context->data;
                 <div class="description mb-4">
 
                     <div style="padding: 20px;">
-                        <a href="booking.php"><button type="button" class="btn btn-primary">Book Now</button></a>
+                        <a href="<?php echo BASEURI.route('requestPay',['amt'=>$pd->price]); ?>"><button type="button" class="btn btn-primary">Book Now</button></a>
                         <button type="button" class="btn btn-danger">AED <?php echo $pd->price; ?></button>
                         <div>
                         </div>

@@ -78,7 +78,7 @@
                 <div class="description mb-4">
 
                     <div style="padding: 20px;">
-                        <a href="<?php echo BASEURI.route('booking'); ?>"><button type="button" class="btn btn-primary">Book Now</button></a>
+                        <a href="<?php echo BASEURI.route('requestPay'); ?>"><button type="button" class="btn btn-primary">Book Now</button></a>
                         <button type="button" class="btn btn-danger">AED 118</button>
                         <div>
                         </div>
