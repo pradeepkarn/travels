@@ -6,6 +6,7 @@ spl_autoload_register('apiControllersLoader');
 spl_autoload_register('cmdControllersLoader');
 spl_autoload_register('frontControllersLoader');
 // spl_autoload_register('shopControllersLoader');
+spl_autoload_register('pgControllersLoader');
 spl_autoload_register('travelControllersLoader');
 
 function classLoader($className){
@@ -76,6 +77,17 @@ function frontControllersLoader($className){
 function travelControllersLoader($className){
     $path = RPATH ."/controllers/travel/";
     $extension = ".travel.php";
+    $fullPath = $path . $className . $extension;
+    
+    if(file_exists($fullPath)){
+        include_once $fullPath;
+    }else{
+        return false;
+    }
+}
+function pgControllersLoader($className){
+    $path = RPATH ."/controllers/pg/";
+    $extension = ".pg.php";
     $fullPath = $path . $className . $extension;
     
     if(file_exists($fullPath)){

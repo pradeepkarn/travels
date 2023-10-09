@@ -5,6 +5,7 @@ include_once 'login_routes.php';
 include_once 'public_routes.php';
 include_once 'user_routes.php';
 include_once 'api_routes.php';
+include_once 'pg_routes.php';
 include_once 'chat_routes.php';
 include_once 'admin_routes.php';
 include_once 'ajax_routes.php';
@@ -14,6 +15,7 @@ $routes = array_merge(
     $public_routes,
     $login_routes,
     $user_routes,
+    $pg_routes,
     $admin_routes,
     $chat_routes,
     $api_routes,
