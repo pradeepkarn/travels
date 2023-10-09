@@ -1,8 +1,8 @@
 <?php
 
 // The limit of data fetch from database at an attempt
-const DB_ROW_LIMIT = 10;
-const FRONT_ROW_LIMIT = 10;
+const DB_ROW_LIMIT = 100;
+const FRONT_ROW_LIMIT = 100;
 
 const USER_ROLES = array(
     'subscriber'=>'Subscriber',

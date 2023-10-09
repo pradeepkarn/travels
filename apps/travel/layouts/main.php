@@ -139,7 +139,7 @@
                                 <li class="white"><strong>PO Box:</strong> +47-252-254-2542</li>
                                 <li class="white"><strong>Location:</strong> Collins Street, sydney, Austrelia</li>
                                 <li class="white"><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94fdfaf2fbd4c0e6f5e2f1f8fdfabaf7fbf9">info@gmail.com</a></li>
-                                <li class="white"><strong>Website:</strong> www.Webartvision.com</li>
+                                <li class="white"><strong>Website:</strong> Linovatesolutions.com</li>
                             </ul>
                         </div>
                     </div>
@@ -356,7 +356,7 @@
                 <div class="container">
                     <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
                         <div class="copyright-text">
-                            <p class="m-0 white">2022 Web Art Vision. All rights reserved.</p>
+                            <p class="m-0 white">2022 Linovate solutions. All rights reserved.</p>
                         </div>
                         <div class="social-links">
                             <ul>

@@ -474,7 +474,7 @@
         &copy; Copyright <strong><span>Alatwal</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        Designed by <a href="https://webartvision.com/">Web Art Vision</a>
+        Designed by <a href="https://Linovatesolutions.com">Linovate solutions</a>
       </div>
     </footer><!-- End Footer -->
 
