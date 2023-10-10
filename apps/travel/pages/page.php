@@ -1,5 +1,6 @@
-<?php 
+<?php
 $pd = $context->data;
+// myprint($pd);
 ?>
 <section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pd->banner; ?>);">
     <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL;  ?>/tour/assets/images/shape8.png);"></div>
@@ -82,7 +83,7 @@ $pd = $context->data;
                 <div class="description mb-4">
 
                     <div style="padding: 20px;">
-                        <a href="<?php echo BASEURI.route('requestPay',['amt'=>$pd->price]); ?>"><button type="button" class="btn btn-primary">Book Now</button></a>
+                        <a href="<?php echo BASEURI . route('booking',['pkgid'=>$pd->id]); ?>"><button type="button" class="btn btn-primary">Book Now</button></a>
                         <button type="button" class="btn btn-danger">AED <?php echo $pd->price; ?></button>
                         <div>
                         </div>

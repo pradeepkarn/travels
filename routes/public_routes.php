@@ -8,5 +8,5 @@ $public_routes = [
     "/tours" => "Travel_tours_ctrl@index@name.tours",
     "/services" => "Travel_services_ctrl@index@name.services",
     "/contact" => "Travel_contact_ctrl@index@name.contact",
-    "/booking" => "Travel_booking_ctrl@index@name.booking",
+    "/booking/{pkgid}" => "Travel_booking_ctrl@index@name.booking",
 ];

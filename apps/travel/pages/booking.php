@@ -1,3 +1,7 @@
+<?php
+$pkg = (object)$context->data?->pkg;
+// myprint($pkg);
+?>
 <section class="breadcrumb-main pb-20 pt-14" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/bg/bg1.jpg);">
     <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/shape8.png);"></div>
     <div class="breadcrumb-outer">
@@ -224,7 +228,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4">
                                     <div class="trend-item2 rounded">
-                                        <a href="destination-single1.html" style="background-image: url(/<?php echo STATIC_URL; ?>/tour/assets/images/destination/aqua.png);"></a>
+                                        <a href="destination-single1.html" style="background-image: url(/<?php echo MEDIA_URL; ?>/images/pages/<?php echo $pkg?->banner; ?>);"></a>
                                         <div class="color-overlay"></div>
                                     </div>
                                 </div>
@@ -238,33 +242,65 @@
                                             <span class="fa fa-star checked"></span>
                                             <small>200 Reviews</small>
                                         </div>
-                                        <h5 class="mb-1"><a href="grid-leftfilter.html">Adriatic Adventure–Zagreb To Athens</a></h5>
-                                        <h6 class="theme mb-0"><i class="icon-location-pin"></i> Croatia</h6>
+                                        <h5 class="mb-1"><?php echo $pkg?->title; ?></h5>
+                                        <h6 class="theme mb-0"><i class="icon-location-pin"></i> <?php echo $pkg?->city; ?></h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="trend-check border-b pb-2">
                             <div class="row">
+                                <!-- ... (existing code) ... -->
+
+                                <!-- Select number of adults -->
+                                <div class="col-lg-6">
+                                    <div class="trend-check-item bg-grey rounded p-3 mb-2">
+                                        <label for="adults">Adults:</label>
+                                        <select id="adults" name="adults" class="form-control">
+                                            <?php $a=1; while ($a <= 10) { ?>
+                                                <option value="<?php echo $a; ?>"><?php echo $a; ?></option>
+                                           <?php $a++; } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Select number of children -->
+                                <div class="col-lg-6">
+                                    <div class="trend-check-item bg-grey rounded p-3 mb-2">
+                                        <label for="children">Children:</label>
+                                        <select id="children" name="children" class="form-control">
+                                        <?php $chi=0; while ($chi <= 10) { ?>
+                                                <option value="<?php echo $chi; ?>"><?php echo $chi; ?></option>
+                                           <?php $chi++; } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trend-check border-b pb-2">
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="trend-check-item bg-grey rounded p-3 mb-2">
                                         <p class="mb-0">Check In</p>
-                                        <h6 class="mb-0">Thu 21 Feb 2022</h6>
+                                        <h6 class="mb-0" id="checkin-date">Thu 21 Feb 2022</h6>
                                         <small>15:00 - 22:00</small>
+                                        <input type="datetime-local" id="checkin-input" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="trend-check-item bg-grey rounded p-3 mb-2">
                                         <p class="mb-0">Check Out</p>
-                                        <h6 class="mb-0">Tue 24 Feb 2022</h6>
+                                        <h6 class="mb-0" id="checkout-date">Tue 24 Feb 2022</h6>
                                         <small>1:00 - 10:00</small>
+                                        <input type="datetime-local" id="checkout-input" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="trend-check border-b pb-2 mb-2">
                             <p class="mb-0">Total Length of Stay:</p>
-                            <h6 class="mb-0">8 Days | 7 Nights </h6>
+                            <h6 class="mb-0" id="length-of-stay">0 Days | 0 Nights </h6>
                             <small><a href="#" class="theme text-decoration-underline">travelling on different dates?</a></small>
                         </div>
                         <div class="trend-check">
@@ -320,3 +356,32 @@
         </div>
     </div>
 </section>
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script>
+    // Get the input elements and the elements where the dates will be displayed
+    var checkinInput = document.getElementById('checkin-input');
+    var checkoutInput = document.getElementById('checkout-input');
+    var checkinDateElement = document.getElementById('checkin-date');
+    var checkoutDateElement = document.getElementById('checkout-date');
+    var lengthOfStayElement = document.getElementById('length-of-stay');
+
+    // Function to calculate the length of stay and update the DOM
+    function updateLengthOfStay() {
+        var checkinDate = moment(checkinInput.value);
+        var checkoutDate = moment(checkoutInput.value);
+
+        // Calculate the difference in days
+        var lengthOfStay = checkoutDate.diff(checkinDate, 'days') + 1; // Adding 1 to include the checkout day
+
+        // Update the displayed dates
+        checkinDateElement.textContent = checkinDate.format('ddd D MMM YYYY');
+        checkoutDateElement.textContent = checkoutDate.format('ddd D MMM YYYY');
+
+        // Update the length of stay
+        lengthOfStayElement.textContent = lengthOfStay + ' Days | ' + (lengthOfStay - 1) + ' Nights';
+    }
+
+    // Add event listeners to the input elements
+    checkinInput.addEventListener('input', updateLengthOfStay);
+    checkoutInput.addEventListener('input', updateLengthOfStay);
+</script>

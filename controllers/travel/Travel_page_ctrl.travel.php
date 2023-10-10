@@ -29,6 +29,7 @@ class Travel_page_ctrl extends Main_ctrl
             'page'=>'page.php',
             'data' => (object) array(
                 'req' => obj($req),
+                'id' => $page->id,
                 'title' => $page->title,
                 'content' => $page->content,
                 'banner' => $page->banner,
