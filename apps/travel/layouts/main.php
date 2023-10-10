@@ -394,7 +394,7 @@
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/bootstrap.min.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/particles.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/particlerun.js"></script>
-    <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/plugin.js"></script>
+    <!-- <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/plugin.js"></script> -->
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/main.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/custom-swiper.js"></script>
     <script src="/<?php echo STATIC_URL; ?>/tour/assets/js/custom-nav.js"></script>

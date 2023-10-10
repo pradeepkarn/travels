@@ -23,7 +23,7 @@ $pkg = (object)$context->data?->pkg;
 
 <section class="trending pt-6 pb-0 bg-lgrey">
     <div class="container">
-        <form id="confirmform" class="mb-2"  action="<?php echo BASEURI . route('requestPay'); ?>">
+        <form id="confirmform" class="mb-2" method="post"  action="<?php echo BASEURI . route('requestPay'); ?>">
             <div class="row">
                 <div class="col-lg-8 mb-4">
                     <div class="payment-book">
@@ -113,7 +113,7 @@ $pkg = (object)$context->data?->pkg;
                                         </div>
                                         <div>
                                             <div id="res"></div>
-
+                                            <button id="confirmbtn" type="submit" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</button>
                                         </div>
 
                                     </div>
@@ -204,7 +204,7 @@ $pkg = (object)$context->data?->pkg;
                     </div>
                 </div>
             </div>
-            <button id="confirmbtn" type="submit" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</button>
+            
         </form>
     </div>
 </section>
