@@ -2,12 +2,47 @@
 // Amount should be in cents, or paise
 final class Stripe_ctrl extends Main_ctrl
 {
-    function request_pay($req=null)
+    function get_pckage_details($id)
     {
-        $req = obj($req);
-        $amt = $req->amt??100;
-        $amt = floatval($amt)*100;
-        $amt==0?("Location: " . BASEURI):null;
+        $db = new Dbobjects;
+        return $db->showOne("select * from content where content.id = $id and content_group='package'");
+    }
+    function request_pay($req = null)
+    {
+        $req = obj($_POST);
+        $rules = [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'country_code' => 'required|numeric',
+            'mobile' => 'required|numeric',
+            'address1' => 'required|string',
+            'address2' => 'required|string',
+            'country' => 'required|string',
+            'state' => 'required|string',
+            'city' => 'required|string',
+            'zip' => 'required|string',
+            'pkgid' => 'required|numeric',
+            'adults' => 'required|numeric',
+            'booking_date' => 'required|datetime',
+        ];
+        $pass = validateData(data: $_POST, rules: $rules);
+        if (!$pass) {
+            echo msg_ssn(return: true, lnbrk: "<br>");
+            return;
+        }
+        if (!email_has_valid_dns($req->email)) {
+            msg_set("Please provide valid email address");
+            echo msg_ssn(return: true, lnbrk: "<br>");
+            return;
+        }
+        $pkg = obj($this->get_pckage_details($req->pkgid));
+        $amt = $req->adults*$pkg->price;
+        if ($amt<=0) {
+            msg_set("Invalid amount");
+            echo msg_ssn(return: true, lnbrk: "<br>");
+            return;
+        }
+        return;
         try {
             $stripe_secret_key = STRIPE_SK;
 
