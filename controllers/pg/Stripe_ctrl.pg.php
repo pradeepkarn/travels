@@ -1,4 +1,5 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 // Amount should be in cents, or paise
 final class Stripe_ctrl extends Main_ctrl
 {
@@ -94,8 +95,11 @@ final class Stripe_ctrl extends Main_ctrl
                 'checkout_session_url' => $checkout_session->url
             ];
             $db = new Dbobjects;
+            $orderid = uniqid('ord');
             $_SESSION['cust_sess_email'] = $req->email;
-            $db->execSql("INSERT INTO stripe_payments (reference_id, checkout_session_id, amount, email) VALUES('$req->pkgid', '$checkout_session->id', $amt, '$req->email');");
+            $_SESSION['cust_sess_product_id'] = $req->pkgid;
+            $_SESSION['cust_sess_order_id'] = $orderid;
+            $db->execSql("INSERT INTO stripe_payments (order_id, product_id, checkout_session_id, amount, email) VALUES('{$orderid}','$req->pkgid', '$checkout_session->id', $amt, '$req->email');");
 
             file_put_contents("log/{$checkout_session->id}.json", json_encode($logData));
             // Redirect the user to the checkout session URL
@@ -131,10 +135,82 @@ final class Stripe_ctrl extends Main_ctrl
     function payment_success($req = null)
     {
         $req = obj($req);
+
+        if (!isset($_SESSION['cust_sess_email'])) {
+            die();
+        }
+        // if(!empty($_GET['session_id'])){ 
+        $db = new Dbobjects;
+        $useremail = $_SESSION['cust_sess_email'];
+        $cust = (object)$db->showOne("select * from stripe_payments where order_id = '{$_SESSION['cust_sess_order_id']}' order by id desc");
+        $session_id = $cust->checkout_session_id;
+    
+        // Set API key 
+        $stripe = new \Stripe\StripeClient(STRIPE_SK);
+    
+        // Fetch the Checkout Session to display the JSON result on the success page 
+        try {
+            $checkout_session = $stripe->checkout->sessions->retrieve($session_id);
+            // myprint($checkout_session);
+        } catch (Exception $e) {
+            $api_error = $e->getMessage();
+        }
+    
+        if (empty($api_error) && $checkout_session) {
+            // Get customer details 
+            $customer_details = $checkout_session->customer_details;
+    
+            // Retrieve the details of a PaymentIntent 
+            try {
+                $paymentIntent = $stripe->paymentIntents->retrieve($checkout_session->payment_intent);
+            } catch (\Stripe\Exception\ApiErrorException $e) {
+                $api_error = $e->getMessage();
+            }
+
+            $arr = null;
+            if (empty($api_error) && $paymentIntent) {
+                // Check whether the payment was successful 
+                if (!empty($paymentIntent) && $paymentIntent->status == 'succeeded') {
+                    // Transaction details  
+                    $arr['order_id'] =  $cust->order_id;
+                    $arr['product_id'] =  $cust->product_id;
+                    $arr['transaction_id'] = $paymentIntent->id;
+                    $arr['amount'] = ($paymentIntent->amount / 100);
+                    $arr['currency'] = $paymentIntent->currency;
+                    $arr['payment_status'] = $paymentIntent->status;
+                    // Customer info 
+                    $customer_name = $customer_email = '';
+                    if (!empty($customer_details)) {
+                        $arr['customer_name'] = !empty($customer_details->name) ? $customer_details->name : '';
+                        $arr['customer_email'] = !empty($customer_details->email) ? $customer_details->email : '';
+                    }
+                    $email_body = render_template("emails/stripe/success.php", obj($arr));
+                    $mail = php_mailer(new PHPMailer());
+                    $mail->setFrom(email, SITE_NAME . "Order Information");
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Order Information';
+                    $mail->Body = $email_body;
+                    $mail->addAddress($customer_details->email, "$customer_details->email");
+                    if ($useremail!=$customer_details->email) {
+                        $mail->addAddress($useremail, "$useremail");
+                    }
+                    if ($mail->send()) {
+                        msg_set("An order email sent to  $customer_details->email, thanks.");
+                    } else {
+                        msg_set("Email sending error");
+                    }
+                }
+            }
+        } else {
+            $html_body = "Payment not done";
+            $html_body .= "<a href=".BASEURI.">HOME</a>";
+            $html_body .= msg_ssn(return:true,lnbrk:"<br>");
+        }
+
         $context = (object) array(
-            'page' => 'about.php',
             'data' => (object) array(
-                'req' => obj($req)
+                'req' => obj($req),
+                'html_body' => $email_body,
             )
         );
         $this->render_layout(context: $context, layout: "apps/travel/pages/stripe/success.php");
