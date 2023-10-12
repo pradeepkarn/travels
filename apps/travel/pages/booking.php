@@ -95,12 +95,12 @@ $pkg = (object)$context->data?->pkg;
                                             <input type="text" name="city">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <div class="form-group mb-2">
                                             <label>ZIP</label>
                                             <input type="text" name="zip">
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                             </div>
@@ -183,7 +183,7 @@ $pkg = (object)$context->data?->pkg;
                                     </div>
                                     <div class="col-lg-12">
                                         <label for="children">Date:</label>
-                                        <input type="datetime-local" name="booking_date" class="form-control mb-2">
+                                        <input type="date" name="booking_date" class="form-control mb-2">
                                     </div>
                                 </div>
                             </div>

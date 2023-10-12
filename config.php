@@ -115,6 +115,7 @@ const sitekey = "37eee8cd266f5a829d6e1a6717492b2b3e4f9317564d39c5617c97c4dca62a8
 const token_security = false;
 
 
+define("orderemail", $env->orderemail);
 define("email", $env->email);
 define("emailhost", $env->emailhost);
 define("emailpass", $env->emailpass);

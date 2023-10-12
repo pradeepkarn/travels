@@ -44,12 +44,12 @@
                                 <div class="color-overlay"></div>
                             </div>
                             <div class="trend-content p-4 pt-5 position-relative">
-                                <div class="trend-meta bg-theme white px-3 py-2 rounded">
+                                <!-- <div class="trend-meta bg-theme white px-3 py-2 rounded">
                                     <div class="entry-author">
                                         <i class="icon-calendar"></i>
-                                        <span class="fw-bold"> <?php echo $pkg->days; ?> Days Tours</span>
+                                        <span class="fw-bold"> <?php //echo $pkg->days; ?> Days Tours</span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <h5 class="theme mb-1"><i class="flaticon-location-pin"></i> <?php echo $pkg->city; ?></h5>
                                 <h3 class="mb-1"><a href="/<?php echo home . route('pageBySlug', ['slug' => $pkg->slug]); ?>"><?php echo pk_excerpt($pkg->title, 20); ?></a></h3>
                                 <div class="rating-main d-flex align-items-center pb-2">

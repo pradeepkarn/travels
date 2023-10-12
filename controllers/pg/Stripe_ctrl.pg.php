@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 // Amount should be in cents, or paise
 final class Stripe_ctrl extends Main_ctrl
@@ -36,12 +37,13 @@ final class Stripe_ctrl extends Main_ctrl
             'country' => 'required|string',
             'state' => 'required|string',
             'city' => 'required|string',
-            'zip' => 'required|string',
             'pkgid' => 'required|numeric',
             'adults' => 'required|numeric',
-            'booking_date' => 'required|datetime',
+            'booking_date' => 'required|date',
             'email' => 'required|email',
         ];
+        $req->children = $req->children??"0";
+        $req->booking_date = date("Y-m-d H:i:s",strtotime($req->booking_date));
         $pass = validateData(data: $_POST, rules: $rules);
         if (!$pass) {
             echo msg_ssn(return: true, lnbrk: "<br>");
@@ -54,6 +56,8 @@ final class Stripe_ctrl extends Main_ctrl
         }
         $pkg = obj($this->get_pckage_details($req->pkgid));
         $amt = $req->adults * $pkg->price;
+        $product_name = $pkg->title;
+        // $jsn = json_encode($pkg,JSON_UNESCAPED_UNICODE);
         if ($amt <= 0) {
             msg_set("Invalid amount");
             echo msg_ssn(return: true, lnbrk: "<br>");
@@ -95,12 +99,64 @@ final class Stripe_ctrl extends Main_ctrl
                 'checkout_session_url' => $checkout_session->url
             ];
             $db = new Dbobjects;
+            $pdo = $db->conn;
+            $pdo->beginTransaction();
             $orderid = uniqid('ord');
             $_SESSION['cust_sess_email'] = $req->email;
             $_SESSION['cust_sess_product_id'] = $req->pkgid;
             $_SESSION['cust_sess_order_id'] = $orderid;
-            $db->execSql("INSERT INTO stripe_payments (order_id, product_id, checkout_session_id, amount, email) VALUES('{$orderid}','$req->pkgid', '$checkout_session->id', $amt, '$req->email');");
 
+
+            $sqles = "INSERT INTO stripe_payments (
+                order_id, 
+                product_id, 
+                product_name, 
+                checkout_session_id, 
+                amount,
+
+                booking_date, 
+                email,
+                first_name,
+                last_name,
+
+                country,
+                state,
+                city,
+                isd_code,
+
+                mobile,
+                adults,
+                children
+                ) 
+                VALUES(
+                    '{$orderid}',
+                    '$req->pkgid', 
+                    '$product_name', 
+                    '$checkout_session->id', 
+                    '$amt',
+
+                    '$req->booking_date',
+                    '$req->email',
+                    '$req->first_name',
+                    '$req->last_name',
+
+                    '$req->country',
+                    '$req->state',
+                    '$req->city',
+                    '$req->country_code',
+
+                    '$req->mobile',
+                    '$req->adults',
+                    '$req->children'
+                    );";
+            try {
+                $db->execSql($sqles);
+                $pdo->commit();
+            } catch (PDOException $th) {
+                $pdo->rollBack();
+                echo "Db error";
+                exit;
+            }
             file_put_contents("log/{$checkout_session->id}.json", json_encode($logData));
             // Redirect the user to the checkout session URL
             http_response_code(303);
@@ -144,10 +200,10 @@ final class Stripe_ctrl extends Main_ctrl
         $useremail = $_SESSION['cust_sess_email'];
         $cust = (object)$db->showOne("select * from stripe_payments where order_id = '{$_SESSION['cust_sess_order_id']}' order by id desc");
         $session_id = $cust->checkout_session_id;
-    
+
         // Set API key 
         $stripe = new \Stripe\StripeClient(STRIPE_SK);
-    
+
         // Fetch the Checkout Session to display the JSON result on the success page 
         try {
             $checkout_session = $stripe->checkout->sessions->retrieve($session_id);
@@ -155,11 +211,11 @@ final class Stripe_ctrl extends Main_ctrl
         } catch (Exception $e) {
             $api_error = $e->getMessage();
         }
-    
+
         if (empty($api_error) && $checkout_session) {
             // Get customer details 
             $customer_details = $checkout_session->customer_details;
-    
+
             // Retrieve the details of a PaymentIntent 
             try {
                 $paymentIntent = $stripe->paymentIntents->retrieve($checkout_session->payment_intent);
@@ -184,14 +240,15 @@ final class Stripe_ctrl extends Main_ctrl
                         $arr['customer_name'] = !empty($customer_details->name) ? $customer_details->name : '';
                         $arr['customer_email'] = !empty($customer_details->email) ? $customer_details->email : '';
                     }
+                    $arr['dbobj'] = $cust;
                     $email_body = render_template("emails/stripe/success.php", obj($arr));
                     $mail = php_mailer(new PHPMailer());
-                    $mail->setFrom(email, SITE_NAME . "Order Information");
+                    $mail->setFrom(orderemail, SITE_NAME . " Order Information");
                     $mail->isHTML(true);
                     $mail->Subject = 'Order Information';
                     $mail->Body = $email_body;
                     $mail->addAddress($customer_details->email, "$customer_details->email");
-                    if ($useremail!=$customer_details->email) {
+                    if ($useremail != $customer_details->email) {
                         $mail->addAddress($useremail, "$useremail");
                     }
                     if ($mail->send()) {
@@ -202,11 +259,10 @@ final class Stripe_ctrl extends Main_ctrl
                 }
             }
         } else {
-            $html_body = "Payment not done";
-            $html_body .= "<a href=".BASEURI.">HOME</a>";
-            $html_body .= msg_ssn(return:true,lnbrk:"<br>");
+            $email_body = "Payment not done";
+            $email_body .= "<a href=" . BASEURI . ">HOME</a>";
         }
-
+        $email_body .= msg_ssn(return: true, lnbrk: "<br>");
         $context = (object) array(
             'data' => (object) array(
                 'req' => obj($req),

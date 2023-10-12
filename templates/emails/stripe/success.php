@@ -1,5 +1,6 @@
 <?php
 $ctx = $context;
+$dbobj = $context->dbobj;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@ $ctx = $context;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset</title>
+    <title>Order Information</title>
     <!-- Add Bootstrap CSS (You can link to a CDN or include it locally) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Add your custom CSS for styling -->
@@ -48,6 +49,11 @@ $ctx = $context;
             <h4>Customer Information</h4>
             <p><b>Name:</b> <?php echo $ctx->customer_name; ?></p>
             <p><b>Email:</b> <?php echo $ctx->customer_email; ?></p>
+            <p><b>Package Name :</b> <?php echo "{$dbobj->product_name}"; ?></p>
+            <p><b>Address :</b> <?php echo "{$dbobj->address1} <br> {$dbobj->address2} <br> {$dbobj->city} <br> {$dbobj->state} <br> {$dbobj->country}"; ?></p>
+            <p><b>Booking Date :</b> <?php echo "{$dbobj->booking_date}"; ?></p>
+            <p><b>Adults :</b> <?php echo "{$dbobj->adults}"; ?></p>
+            <p><b>Children :</b> <?php echo "{$dbobj->children}"; ?></p>
             <a href="<?php echo BASEURI; ?>">HOME</a>
         <?php } else { ?>
             <h1 class="error">Your Payment been failed!</h1>
