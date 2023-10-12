@@ -444,14 +444,14 @@
     </style>
     <div class="whatsapp-container">
         <button class="whatsapp-icon">
-            <i class="fas fa-user"></i>
+        <i class="fab fa-whatsapp"></i>
         </button>
     </div>
     <script>
         const whatsappButton = document.querySelector('.whatsapp-icon');
 
         whatsappButton.addEventListener('click', () => {
-            window.open('https://api.whatsapp.com/send?phone=971507312910', '_blank');
+            window.open('https://wa.me/971507312910', '_blank');
         });
     </script>
 </body>
