@@ -113,7 +113,7 @@ $pkg = (object)$context->data?->pkg;
                                         </div>
                                         <div>
                                             <div id="res"></div>
-                                            <button id="confirmbtn" type="submit" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</button>
+                                            
                                         </div>
 
                                     </div>
@@ -198,6 +198,7 @@ $pkg = (object)$context->data?->pkg;
                                     </tr>
                                 </tfoot>
                             </table>
+                            <button id="confirmbtn" type="submit" class="nir-btn float-lg-end w-25" style="padding: 0 100px;">CONFIRM BOOKING</button>
                         </div>
 
 

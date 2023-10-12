@@ -35,7 +35,7 @@
                         <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white">
                             <div class="why-us-content">
                                 <div class="why-us-icon">
-                                    <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/international-passport.png" alt="" width="85px">
+                                    <img src="/<?php echo STATIC_URL; ?>/tour/assets/images/international-passport.png" alt="" width="85px" style="margin-left: 55px;">
                                 </div>
                                 <h4><a href="visa.php">INTERNATIONAL VISA</a></h4>
                                 <p class="mb-2">Excepteur sint occaecat cupidatat</p>
