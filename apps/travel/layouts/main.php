@@ -40,8 +40,8 @@
 </head>
 
 <body>
-<div id="global-progress-bar" style="height: 5px;" class="progress fixed-top" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+    <div id="global-progress-bar" style="height: 5px;" class="progress fixed-top" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
     </div>
     <div id="preloader">
         <div id="status"></div>
@@ -147,8 +147,8 @@
                         <div class="footer-links">
                             <h3 class="white">Quick link</h3>
                             <ul>
-                                <li><a href="<?php echo BASEURI.route('aboutUs'); ?>">About Us</a></li>
-                                <li><a href="<?php echo BASEURI.route('tours'); ?>">Tours</a></li>
+                                <li><a href="<?php echo BASEURI . route('aboutUs'); ?>">About Us</a></li>
+                                <li><a href="<?php echo BASEURI . route('tours'); ?>">Tours</a></li>
                                 <li><a href="<?php echo BASEURI; ?>/privacy-policy">Privacy Policy</a></li>
                                 <li><a href="<?php echo BASEURI; ?>/terms-of-use">Terms of use</a></li>
                                 <li><a href="#">Customer Service</a></li>
@@ -223,7 +223,7 @@
                                                 <div class="comment-btn mb-2 pb-2 text-center border-b">
                                                     <button type="button" class="nir-btn w-100" id="login-btn">Login</button>
                                                 </div>
-                                                
+
                                             </form>
                                             <?php
 
@@ -282,7 +282,7 @@
                                                 </div>
                                                 <div class="d-grid gap-2">
                                                     <button disabled id="reg-btn" type="button" class="btn btn-primary"><?php echo lang('nav')->register ?? 'Register'; ?></button>
-                                                    
+
                                                 </div>
                                             </form>
                                             <?php
@@ -402,22 +402,57 @@
     <?php
     ajaxActive("#global-progress-bar");
     ?>
-   <script>
-    $.ajaxSetup({
-        xhr: function() {
-          var xhr = new XMLHttpRequest();
-          xhr.upload.addEventListener('progress', function(evt) {
-            if (evt.lengthComputable) {
-              var percentComplete = Math.round((evt.loaded / evt.total) * 100);
-              // Update the width of the progress bar inside #global-progress-bar
-              $('#global-progress-bar .progress-bar').css('width', percentComplete + '%');
-              // Update the text inside the progress bar (if needed)
-              // $('#global-progress-bar .progress-bar').html(percentComplete + '%');
+    <script>
+        $.ajaxSetup({
+            xhr: function() {
+                var xhr = new XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                        // Update the width of the progress bar inside #global-progress-bar
+                        $('#global-progress-bar .progress-bar').css('width', percentComplete + '%');
+                        // Update the text inside the progress bar (if needed)
+                        // $('#global-progress-bar .progress-bar').html(percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
             }
-          }, false);
-          return xhr;
+        });
+    </script>
+    <style>
+        .whatsapp-container {
+            position: fixed;
+            bottom: 20px;
+            right: 100px;
+            z-index: 1000;
         }
-      });
+
+        .whatsapp-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            width: 50px;
+            background-color: #25D366;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50%;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+    </style>
+    <div class="whatsapp-container">
+        <button class="whatsapp-icon">
+            <i class="fas fa-user"></i>
+        </button>
+    </div>
+    <script>
+        const whatsappButton = document.querySelector('.whatsapp-icon');
+
+        whatsappButton.addEventListener('click', () => {
+            window.open('https://api.whatsapp.com/send?phone=971507312910', '_blank');
+        });
     </script>
 </body>
 
