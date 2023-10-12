@@ -422,7 +422,7 @@
     <style>
         .whatsapp-container {
             position: fixed;
-            bottom: 20px;
+            bottom: 18px;
             right: 100px;
             z-index: 1000;
         }
