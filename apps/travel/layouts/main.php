@@ -24,6 +24,8 @@
     <script src="/<?php echo STATIC_URL; ?>/owl/dist/owl.carousel.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+   
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         function swalert(obj) {
             Swal.fire(

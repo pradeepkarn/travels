@@ -39,7 +39,7 @@ class Travel_home_ctrl extends Main_ctrl
                 'current_page' => $cp,
                 'total_object' => $to,
                 'about' => $this->about_content(),
-                "hero" => $this->homepage_slider($ord = "DESC", $catid=354, $limit = 20, $active = 1)
+                "hero" => $this->homepage_slider($ord = "DESC", $limit = 20, $active = 1)
             )
         );
         if (isset($_COOKIE['remember_token'])) {
@@ -48,11 +48,11 @@ class Travel_home_ctrl extends Main_ctrl
         }
         $this->render_layout($context);
     }
-    public function homepage_slider($ord = "DESC", $catid=362, $limit = 10, $active = 1)
+    public function homepage_slider($ord = "DESC", $limit = 10, $active = 1)
     {
         $cntobj = new Dbobjects;
         $cntobj->tableName = 'content';
-        return $cntobj->filter(array('content_group' => 'slider', 'parent_id'=>$catid, 'is_active' => $active), $ord, $limit);
+        return $cntobj->filter(array('content_group' => 'slider', 'is_active' => $active), $ord, $limit);
     }
     public function package_list($ord = "DESC", $limit = 1, $active = 1)
     {

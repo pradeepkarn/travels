@@ -298,33 +298,33 @@
         </li><!-- End Dashboard Nav -->
 
         <!-- Post components -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-menu-button-wide"></i><span>Posts</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="/<?php echo home . route('postCreate'); ?>">
+              <a href="/<?php //echo home . route('postCreate'); ?>">
                 <i class="bi bi-circle"></i><span>Add Post</span>
               </a>
             </li>
             <li>
-              <a href="/<?php echo home . route('postList'); ?>">
+              <a href="/<?php //echo home . route('postList'); ?>">
                 <i class="bi bi-circle"></i><span>All Posts</span>
               </a>
             </li>
             <li>
-              <a href="/<?php echo home . route('postCatCreate'); ?>">
+              <a href="/<?php //echo home . route('postCatCreate'); ?>">
                 <i class="bi bi-circle"></i><span>Add Category</span>
               </a>
             </li>
             <li>
-              <a href="/<?php echo home . route('postCatList'); ?>">
+              <a href="/<?php //echo home . route('postCatList'); ?>">
                 <i class="bi bi-circle"></i><span>All Categories</span>
               </a>
             </li>
           </ul>
-        </li>
+        </li> -->
         <!-- Page components -->
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#components-pages" data-bs-toggle="collapse" href="#">
